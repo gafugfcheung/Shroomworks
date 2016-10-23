@@ -12,13 +12,7 @@ from .forms import PicForm
 def index(request):
     pic_list = Pic.objects.order_by('-pub_date')
     template = loader.get_template('basic/index.html')
-
-    if request.method == 'POST':
-        form = PicForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
-    else:
-        form = PicForm()
+    form = PicForm()
     context = {'pic_list': pic_list, 'form': form}
     return HttpResponse(template.render(context, request))
 
@@ -29,6 +23,4 @@ def detail(request, pic_id):
 def add(request, x):
     pic = PicForm(request.POST)
     pic.save()
-    lat1 = request.POST['lat']
-    lng1 = request.POST['lng']
     return HttpResponseRedirect('/basic/')
