@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2> {{ welcome }} </h2>
+
+<h2>Your profile</h2>
+Username: {{ user.username }}
+<br>
+Full name: {{ user.first_name }} {{ user.last_name }}
+<br>
+Email: {{ user.email }}
+<br>
+
+<form action="logout" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
+
+{% endblock content %}

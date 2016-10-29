@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Enter your information to log in:</h2>
+{{ err_msg }}
+
+<form action="login" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Login">
+</form>
+
+<a href="/herenow/signup">New user?</a>
+{% endblock content %}
