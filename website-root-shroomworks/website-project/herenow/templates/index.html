@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
+{% load staticfiles%}
+
 {% block content %}
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+
+<script>
+  var markers = [];
+
+  // Get ID and coords from DB and loop into the DB
+
+  markers.push({lat: -80.0, lng: -20.0, id: 0});
+  markers.push({lat: -80.0, lng: 0.0, id: 1});
+  markers.push({lat: -60.0, lng: 0.0, id: 2});
+  markers.push({lat: -40.0, lng: 0.0, id: 3});
+  markers.push({lat: -20.0, lng: 0.0, id: 4});
+  markers.push({lat: 0.0, lng: 0.0, id: 5});
+  markers.push({lat: 20.0, lng: 0.0, id: 6});
+  markers.push({lat: 40.0, lng: 0.0, id: 7});
+  markers.push({lat: 60.0, lng: 0.0, id: 8});
+  markers.push({lat: 80.0, lng: 0.0, id: 9});
+  markers.push({lat: 80.0, lng: 20.0, id: 10});
+
+</script>
+
+<nav class="navbar navbar-inverse nomargin navbar-fixed-top">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -18,8 +40,103 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
+</nav>
+
+<div class="container-fluid nomargin">
+
+  <div id="mapstyle">
+    <div id="map">
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 52.0, lng: 21.0}
+        });
+        for (var i in markers) {
+          var marker = new google.maps.Marker({
+            position: {lat: markers[i].lat, lng: markers[i].lng},
+            map: map
+          });
+        }
+      }
+      </script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0&callback=initMap">
+      </script>
+    </div>
+  </div>
+
+  <div id="newsfeed" style="">
+
+    <div class="news-item">
+
+      <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
+      <div class="news-description">
+        This is a Picadilly line train terminating at Cockfosters.
+      </div>
+    </div>
+
+    <div class="news-item">
+      <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
+      <div class="news-description">
+        This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
+      </div>
+    </div>
+
+        <div class="news-item">
+
+          <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
+          <div class="news-description">
+            This is a Picadilly line train terminating at Cockfosters.
+          </div>
+        </div>
+
+        <div class="news-item">
+          <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
+          <div class="news-description">
+            This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
+          </div>
+        </div>
+
+            <div class="news-item">
+
+              <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
+              <div class="news-description">
+                This is a Picadilly line train terminating at Cockfosters.
+              </div>
+            </div>
+
+            <div class="news-item">
+              <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
+              <div class="news-description">
+                This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
+              </div>
+            </div>
+
+                <div class="news-item">
+
+                  <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
+                  <div class="news-description">
+                    This is a Picadilly line train terminating at Cockfosters.
+                  </div>
+                </div>
+
+                <div class="news-item">
+                  <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
+                  <div class="news-description">
+                    This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
+                  </div>
+                </div>
+
+
+  </div>
+
+</div>
+
+</div>
+
+
+
 
 {% endblock %}
