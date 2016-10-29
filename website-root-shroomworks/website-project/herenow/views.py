@@ -17,6 +17,11 @@ from .forms import LoginForm, SignupForm
 def index(request):
     return render(request, 'index.html')
 
+def index_old(request):
+    return render(request, 'index_old.html')
+
+def map(request):
+    return render(request, 'map.html')
 
 # SIGN UP FUNCTIONS
 def signup(request):
