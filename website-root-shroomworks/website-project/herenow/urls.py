@@ -5,6 +5,8 @@ from . import views
 app_name = 'herenow'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^index_old/$', views.index_old, name='index_old'),
+    url(r'^map/$', views.map, name='map'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^signup/create_user$', views.create_user, name='create_user'),
     url(r'^login_screen/$', views.login_screen, name='login_screen'),

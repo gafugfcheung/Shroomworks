@@ -1,0 +1,30 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<div class="background">
+
+  <!-- sets entire page background -->
+  <div class="container">
+
+    <!-- defines header -->
+    <div class="header">
+
+      <h1>Herenow app</h1>
+      <a href="/herenow/old">Home</a>
+      <br>
+      <a href="/herenow/old/profile">My profile</a>
+      <br>
+      <a href="/herenow/old/feed">What's new</a>
+
+    </div>
+
+    <!-- defines body -->
+    <div class="body">
+
+      {% block content %} {% endblock %}
+
+    </div>
+
+  </div>
+
+</div>
