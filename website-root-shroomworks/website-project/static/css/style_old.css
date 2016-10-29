@@ -1,0 +1,36 @@
+html {
+  font-family: arial !important;
+}
+
+div.background {
+  background-color: #FAFAFA;
+  height: 1000px;
+}
+
+div.container {
+  background-color: #E4E4E4;
+  margin: 0 auto;
+  width: 800px;
+  padding: 50px;
+}
+
+.header {
+  background-color: #E0E0E0;
+}
+
+.body {
+  background-color: #E0E0E0;
+}
+
+p {
+  color: #404040;
+}
+
+h1 {
+  color: #404040;
+}
+
+h2 {
+  color: #404040;
+  font-size: 16pt;
+}
