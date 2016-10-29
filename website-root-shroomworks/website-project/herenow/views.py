@@ -33,6 +33,8 @@ def create_user(request):
         user.first_name = request.POST['first_name']
         user.last_name = request.POST['last_name']
         user.save()
+        profile = Profile(user=user)
+        profile.save()
         auth_login(request, user)
         return redirect('/herenow/profile?welcome=True')
     else:
