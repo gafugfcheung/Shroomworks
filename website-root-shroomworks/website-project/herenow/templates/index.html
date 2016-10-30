@@ -5,29 +5,40 @@
 {% block content %}
 
 <script>
-  var markers = [];
+  var markers = {};
+  const TOTAL_MARKERS = 100;
 
-  // Get ID and coords from DB and loop into the DB
+  // TODO: Get ID and coords from DB and loop into the array
 
-  markers.push({lat: -80.0, lng: -20.0, id: 0});
-  markers.push({lat: -80.0, lng: 0.0, id: 1});
-  markers.push({lat: -60.0, lng: 0.0, id: 2});
-  markers.push({lat: -40.0, lng: 0.0, id: 3});
-  markers.push({lat: -20.0, lng: 0.0, id: 4});
-  markers.push({lat: 0.0, lng: 0.0, id: 5});
-  markers.push({lat: 20.0, lng: 0.0, id: 6});
-  markers.push({lat: 40.0, lng: 0.0, id: 7});
-  markers.push({lat: 60.0, lng: 0.0, id: 8});
-  markers.push({lat: 80.0, lng: 0.0, id: 9});
-  markers.push({lat: 80.0, lng: 20.0, id: 10});
+  for (var id = 0; id < TOTAL_MARKERS; id++) {
+    var random_lat = (Math.random()-0.5) * 180;
+    var random_lng = (Math.random()-0.5) * 360;
+    markers[id] = {lat: random_lat, lng: random_lng};
+  }
 
-  function add() {
-    var coords = {lat: document.getElementById('form-lat').value, lng: document.getElementById('form-lat').value, id: markers[markers.length()-1].id + 1};
-    markers.push(coords);
-    var marker = new google.maps.Marker({
-      position: {lat: coords.lat, lng: coords.lng},
-      map: map
-    });
+  function markerClicked(shroom_id) {
+    document.getElementById("newsfeed").innerHTML = shroomHTML(shroom_id) + document.getElementById("newsfeed").innerHTML;
+  }
+
+  function shroomHTML(shroom_id) {
+    var result = '';
+    result += '<div class="news-item"><div id="news-image">';
+    if (shroom_id % 2 == 0) {
+      result += '<img class="news-image" src="{% static "images/Cockfosters.jpg" %}">';
+    } else {
+      result += '<img class="news-image" src="{% static "images/moorgate.jpg" %}">';
+    }
+    result += '</div><div id="news-description">';
+    result += 'ID: ' + shroom_id + '<br>';
+    result += 'Latitude: ' + markers[shroom_id].lat + '<br>';
+    result += 'Longitude: ' + markers[shroom_id].lng + '<br>';
+    if (shroom_id % 2 == 0) {
+      result += 'This is a Picadilly line train terminating at Cockfosters.';
+    } else {
+      result += 'This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.';
+    }
+    result += '</div></div>';
+    return result;
   }
 
 </script>
@@ -48,13 +59,18 @@
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: {lat: 52.0, lng: 21.0}
+          zoom: 3,
+          center: {lat: 50.0, lng: 0.0}
         });
-        for (var i in markers) {
+        for (var m in markers) {
           var marker = new google.maps.Marker({
-            position: {lat: markers[i].lat, lng: markers[i].lng},
+            position: {lat: markers[m].lat, lng: markers[m].lng},
+            label: m.toString(),
+            shroom_id: m,
             map: map
+          });
+          marker.addListener('click', function() {
+            markerClicked(this.shroom_id);
           });
         }
       }
@@ -64,67 +80,8 @@
     </div>
   </div>
 
-  <div id="newsfeed" style="">
+  <div id="newsfeed">
 
-    <div class="news-item">
-
-      <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
-      <div class="news-description">
-        This is a Picadilly line train terminating at Cockfosters.
-      </div>
-    </div>
-
-    <div class="news-item">
-      <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
-      <div class="news-description">
-        This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
-      </div>
-    </div>
-
-        <div class="news-item">
-
-          <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
-          <div class="news-description">
-            This is a Picadilly line train terminating at Cockfosters.
-          </div>
-        </div>
-
-        <div class="news-item">
-          <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
-          <div class="news-description">
-            This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
-          </div>
-        </div>
-
-            <div class="news-item">
-
-              <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
-              <div class="news-description">
-                This is a Picadilly line train terminating at Cockfosters.
-              </div>
-            </div>
-
-            <div class="news-item">
-              <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
-              <div class="news-description">
-                This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
-              </div>
-            </div>
-
-                <div class="news-item">
-
-                  <img class="news-image" src="{% static 'images/Cockfosters.jpg' %}">
-                  <div class="news-description">
-                    This is a Picadilly line train terminating at Cockfosters.
-                  </div>
-                </div>
-
-                <div class="news-item">
-                  <img class="news-image" src="{% static 'images/moorgate.jpg' %}">
-                  <div class="news-description">
-                    This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.
-                  </div>
-                </div>
 
 
   </div>

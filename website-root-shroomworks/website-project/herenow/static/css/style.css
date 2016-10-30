@@ -1,7 +1,6 @@
 #mapstyle {
   width: 80%;
   position:fixed;
-  background: green;
   height: 100%;
 }
 
@@ -28,7 +27,7 @@
 .news-item {
   margin: 8px;
   padding: 8px;
-  border: 1px solid #bbb;
+  border-bottom: 1px solid #ddd;
   opacity: 0.85;
 }
 
@@ -43,7 +42,7 @@
   margin-right: auto;
 }
 
-.news-description {
+#news-description {
   color: #444;
   padding-top: 6px;
 }
