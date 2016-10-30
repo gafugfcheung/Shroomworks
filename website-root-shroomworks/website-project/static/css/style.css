@@ -39,6 +39,7 @@
 
 .news-image {
   width: 100%;
+  height: 300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -46,14 +47,4 @@
 .news-description {
   color: #444;
   padding-top: 6px;
-}
-
-.image-form {
-  margin: 12px;
-  color: white;
-}
-
-.horizontal-form {
-  display: inline !important;
-  color: black;
 }

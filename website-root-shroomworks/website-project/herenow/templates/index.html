@@ -21,27 +21,24 @@
   markers.push({lat: 80.0, lng: 0.0, id: 9});
   markers.push({lat: 80.0, lng: 20.0, id: 10});
 
+  function add() {
+    var coords = {lat: document.getElementById('form-lat').value, lng: document.getElementById('form-lat').value, id: markers[markers.length()-1].id + 1};
+    markers.push(coords);
+    var marker = new google.maps.Marker({
+      position: {lat: coords.lat, lng: coords.lng},
+      map: map
+    });
+  }
+
 </script>
 
 <nav class="navbar navbar-inverse nomargin navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
+  <form onSubmit="add()" class="image-form" id="image-submit-form">
+    Latitude: <input class="horizontal-form" type="text" id="form-lat">&nbsp;
+    Longitude: <input class="horizontal-form" type="text" id="form-lng">&nbsp;
+    <input class="horizontal-form" type="file" style="color: white">&nbsp;
+    <input class="horizontal-form" type="submit" value="Submit">
+  </form>
 </nav>
 
 <div class="container-fluid nomargin">
