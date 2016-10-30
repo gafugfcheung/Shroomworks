@@ -1,15 +1,35 @@
+<script>
+  function upd_status() {
+    document.getElementById("upd_stat").style.display = "block";
+    document.getElementById("upd_button").style.display = "none";
+  }
+</script>
+
 {% extends "base_old.html" %}
 
 {% block content %}
 <h2> {{ welcome }} </h2>
 
 <h2>Your profile</h2>
-Username: {{ user.username }}
+Username: {{ profile.user.username }}
 <br>
-Full name: {{ user.first_name }} {{ user.last_name }}
+Full name: {{ profile.user.first_name }} {{ profile.user.last_name }}
 <br>
-Email: {{ user.email }}
+Email: {{ profile.user.email }}
 <br>
+Status: {{ profile.status }}
+
+<div id="upd_button" style="display:block">
+  <button onclick="upd_status()">Update status</button>
+</div>
+
+<div id="upd_stat" style="display:none">
+  <form action="update_status" method="post">
+    {% csrf_token %}
+    New status here: <input type="text" name="status"><br>
+    <input type="submit" value="Update">
+  </form>
+</div>
 
 <form action="logout" method="post">
   {% csrf_token %}
