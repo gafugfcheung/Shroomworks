@@ -1,6 +1,7 @@
 # http
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse
+from django.template import loader
 
 # django
 from django.contrib.auth import authenticate
@@ -13,7 +14,8 @@ from herenow.models import Profile, Post
 from django.contrib.auth.models import User
 
 # forms
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, UpdateProfilePictureForm
+
 
 # SIGN UP FUNCTIONS
 def signup(request):
@@ -83,3 +85,23 @@ def update_status(request):
         current_profile.status = request.POST['status']
         current_profile.save()
         return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
+
+@csrf_exempt
+def update_image(request):
+    print 'entering update function'
+    current_user = request.user
+    if current_user.is_authenticated:
+        print 'user is authenticated'
+        form = UpdateProfilePictureForm(request.POST, request.FILES)
+        print 'got form response'
+        if form.is_valid():
+            print 'form is valid'
+            current_profile = Profile.objects.get(user=current_user)
+            current_profile.image.delete(save=True)
+            current_profile.image = form.cleaned_data['image']
+            print 'copying data to profile'
+            current_profile.save()
+            print 'data saved'
+            return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
+        else:
+            return HttpResponse('Invalid form!')

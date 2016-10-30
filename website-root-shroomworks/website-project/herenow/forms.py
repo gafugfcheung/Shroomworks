@@ -1,8 +1,13 @@
+from .models import Profile
 from django import forms
+from django.db import models
+from django.forms import ModelForm
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(widget=forms.PasswordInput())
+
 
 class SignupForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
@@ -10,3 +15,7 @@ class SignupForm(forms.Form):
     first_name = forms.CharField(label='First name', max_length=100)
     last_name = forms.CharField(label='Last name', max_length=100)
     password = forms.CharField(widget=forms.PasswordInput())
+
+
+class UpdateProfilePictureForm(forms.Form):
+        image = forms.ImageField()

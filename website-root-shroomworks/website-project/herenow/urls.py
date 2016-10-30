@@ -3,6 +3,9 @@ from django.conf.urls import url
 from . import views
 from . import profile_view
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 app_name = 'herenow'
 urlpatterns = [
     # index
@@ -20,7 +23,11 @@ urlpatterns = [
     url(r'^profile$', profile_view.profile, name='profile'),
     url(r'^logout$', profile_view.logout, name='logout'),
     url(r'^update_status$', profile_view.update_status, name='update_status'),
+    url(r'^update_image$', profile_view.update_image, name='update_image'),
 
     # feed
     url(r'^feed/$', views.feed, name='feed'),
 ]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,11 +4,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from django.conf import settings
 
 class Profile(models.Model):
     created_datetime = models.DateTimeField('date published', default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="profile", height_field=None, width_field=None)
 
 
 class Location(models.Model):
@@ -21,3 +23,4 @@ class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     caption = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="/images/posts", height_field='1400', width_field='1050')

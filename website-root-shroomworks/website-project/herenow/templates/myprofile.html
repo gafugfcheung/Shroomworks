@@ -1,14 +1,24 @@
 <script>
   function upd_status() {
     document.getElementById("upd_stat").style.display = "block";
-    document.getElementById("upd_button").style.display = "none";
+    document.getElementById("upd_status_button").style.display = "none";
   }
+
+  function upd_image() {
+    document.getElementById("upd_image").style.display = "block";
+    document.getElementById("upd_image_button").style.display = "none";
+  }
+
 </script>
 
 {% extends "base_old.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <h2> {{ welcome }} </h2>
+
+<!--<img src='{% static profile.image %}'>-->
+<img src='{{ profile.image.url }}'>
 
 <h2>Your profile</h2>
 Username: {{ profile.user.username }}
@@ -19,7 +29,7 @@ Email: {{ profile.user.email }}
 <br>
 Status: {{ profile.status }}
 
-<div id="upd_button" style="display:block">
+<div id="upd_status_button" style="display:block">
   <button onclick="upd_status()">Update status</button>
 </div>
 
@@ -28,6 +38,18 @@ Status: {{ profile.status }}
     {% csrf_token %}
     New status here: <input type="text" name="status"><br>
     <input type="submit" value="Update">
+  </form>
+</div>
+
+<div id="upd_image_button" style="display:block">
+  <button onclick="upd_image()">Update profile picture</button>
+</div>
+
+<div id="upd_image" style="display:none">
+  <form action="update_image" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Upload picture: <input type="file" name="image" accept="image/*">
+    <input type="submit" value="Submit">
   </form>
 </div>
 
