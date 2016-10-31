@@ -14,7 +14,13 @@ from herenow.models import Profile, Post
 from django.contrib.auth.models import User
 
 # forms
-from .forms import LoginForm, SignupForm, UpdateProfilePictureForm, CreatePostForm
+from .forms import LoginForm, SignupForm, UpdateProfilePictureForm, CreatePostForm, UpdateProfilePictureFormBase64
+
+# parse image
+import re
+import base64
+from django.core.files.base import ContentFile
+
 
 
 # SIGN UP FUNCTIONS
@@ -59,7 +65,8 @@ def login_screen(request, err_msg=""):
 
 def create_post(request, err_msg=""):
     form = CreatePostForm()
-    return render(request, 'new_post.html', {'form': form, 'err_msg': err_msg})
+    form_pic = UpdateProfilePictureFormBase64()
+    return render(request, 'new_post.html', {'form': form, 'form_pic': form_pic, 'err_msg': err_msg})
 
 
 # USER PROFILE
@@ -98,20 +105,38 @@ def update_status(request):
 
 @csrf_exempt
 def update_image(request):
-    print 'entering update function'
     current_user = request.user
     if current_user.is_authenticated:
-        print 'user is authenticated'
         form = UpdateProfilePictureForm(request.POST, request.FILES)
-        print 'got form response'
         if form.is_valid():
-            print 'form is valid'
             current_profile = Profile.objects.get(user=current_user)
             current_profile.image.delete(save=True)
             current_profile.image = form.cleaned_data['image']
-            print 'copying data to profile'
             current_profile.save()
-            print 'data saved'
             return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
         else:
             return HttpResponse('Invalid form!')
+
+@csrf_exempt
+def update_image_base64(request):
+    print 'entering update function'
+    current_user = request.user
+    if current_user.is_authenticated:
+        dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+        ImageData = request.POST.get('image_b64')
+        ImageData = dataUrlPattern.match(ImageData).group(2)
+        # If none or len 0, means illegal image data
+        if ImageData == None or len(ImageData) == 0:
+            # PRINT ERROR MESSAGE HERE
+            print "invalid size"
+            pass
+        # Decode the 64 bit string into 32 bit
+        image = ContentFile(base64.b64decode(ImageData), current_user.username + ".jpeg")
+        print 'user is authenticated'
+        current_profile = Profile.objects.get(user=current_user)
+        current_profile.image.delete(save=True)
+        current_profile.image = image
+        print 'copying data to profile'
+        current_profile.save()
+        print 'data saved'
+        return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})

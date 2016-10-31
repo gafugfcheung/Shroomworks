@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^logout$', profile_view.logout, name='logout'),
     url(r'^update_status$', profile_view.update_status, name='update_status'),
     url(r'^update_image$', profile_view.update_image, name='update_image'),
+    url(r'^new_post/update_image_base64$', profile_view.update_image_base64, name='update_image_base64'),
 
     # feed
     url(r'^feed/$', views.feed, name='feed'),

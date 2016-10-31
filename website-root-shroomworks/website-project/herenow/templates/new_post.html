@@ -23,8 +23,8 @@
       }
 
       function showPosition(position) {
-          document.getElementById("form-lat").value = position.coords.latitude;
-          document.getElementById("form-lng").value = position.coords.longitude;
+          document.getElementById("id_lat").value = position.coords.latitude;
+          document.getElementById("id_lon").value = position.coords.longitude;
           getMiniMap(position);
       }
 
@@ -57,9 +57,9 @@
     // Trigger photo take
     function snap() {
     	document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
-      document.getElementById('test').innerHTML = document.getElementById('canvas').toDataURL('image/jpeg');
       document.getElementById('take_pic').style.display = 'none';
       document.getElementById('show_pic').style.display = 'block';
+      document.getElementById('id_image_b64').value = document.getElementById('canvas').toDataURL("image/png");
     };
 
     function retakePicture() {
@@ -93,6 +93,12 @@
   <br>
   <canvas id="canvas" width="400" height="300"></canvas>
 </div>
+
+<form id="update_pic_form" action="update_image_base64" method="post">
+  {% csrf_token %}
+  {{ form_pic.as_p }}
+  <input type="submit" value="Post profile picture!">
+</form>
 
 <br>
 

@@ -20,6 +20,9 @@ class SignupForm(forms.Form):
 class UpdateProfilePictureForm(forms.Form):
     image = forms.ImageField()
 
+class UpdateProfilePictureFormBase64(forms.Form):
+    image_b64 = forms.CharField()
+
 class CreatePostForm(forms.Form):
     image = forms.ImageField()
     caption = forms.CharField(label='Caption', max_length=100)

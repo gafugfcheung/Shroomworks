@@ -122,7 +122,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # User uploaded content
-MEDIA_URL = 'media/'
+MEDIA_URL = 'herenow/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'herenow/media/')
 
 #LOGIN_REDIRECT_URL = './login/'
