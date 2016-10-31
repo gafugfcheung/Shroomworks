@@ -84,12 +84,17 @@ def logout(request):
 
 @csrf_exempt
 def update_status(request):
-    current_user = request.user
-    if current_user.is_authenticated:
-        current_profile = Profile.objects.get(user=current_user)
-        current_profile.status = request.POST['status']
-        current_profile.save()
-        return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
+    print "> receiving status update"
+    if request.is_ajax():
+        print "> is_ajax() == true"
+    if request.method == "POST":
+        print "> method == post"
+        current_user = request.user
+        if current_user.is_authenticated:
+            current_profile = Profile.objects.get(user=current_user)
+            current_profile.status = request.POST['status']
+            current_profile.save()
+            return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
 
 @csrf_exempt
 def update_image(request):

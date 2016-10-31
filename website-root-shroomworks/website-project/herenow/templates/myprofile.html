@@ -8,6 +8,19 @@
     document.getElementById("upd_image").style.display = "block";
     document.getElementById("upd_image_button").style.display = "none";
   }
+
+  $(document).on('submit', 'form.dynamic-form', function(form) {
+  var $form = $(form);
+  $.ajax({
+      type: form.method,
+      url: form.action,
+      data: $form.serialize(),
+      success: function(data) {
+        $form.replace(data);
+      }
+    });
+  });
+
 </script>
 
 {% extends "base_old.html" %}
@@ -36,10 +49,10 @@ Status: {{ profile.status }}
 </div>
 
 <div id="upd_stat" style="display:none">
-  <form action="update_status" method="post">
+  <form action="update_status" method="post" class="dynamic-form">
     {% csrf_token %}
     New status here: <input type="text" name="status"><br>
-    <input type="submit" value="Update">
+    <button type="input">Submit</button>
   </form>
 </div>
 
