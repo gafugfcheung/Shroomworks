@@ -14,7 +14,7 @@ from herenow.models import Profile, Post
 from django.contrib.auth.models import User
 
 # forms
-from .forms import LoginForm, SignupForm, UpdateProfilePictureForm
+from .forms import LoginForm, SignupForm, UpdateProfilePictureForm, CreatePostForm
 
 
 # SIGN UP FUNCTIONS
@@ -55,6 +55,11 @@ def login(request):
 def login_screen(request, err_msg=""):
     form = LoginForm()
     return render(request, 'login_screen.html', {'form': form, 'err_msg': err_msg})
+
+
+def create_post(request, err_msg=""):
+    form = CreatePostForm()
+    return render(request, 'new_post.html', {'form': form, 'err_msg': err_msg})
 
 
 # USER PROFILE

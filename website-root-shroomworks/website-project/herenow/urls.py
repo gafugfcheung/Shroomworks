@@ -27,6 +27,10 @@ urlpatterns = [
 
     # feed
     url(r'^feed/$', views.feed, name='feed'),
+
+    # post
+    url(r'^new_post/$', profile_view.create_post, name='new_post'),
+
 ]
 
 if settings.DEBUG is True:

@@ -8,7 +8,6 @@
     document.getElementById("upd_image").style.display = "block";
     document.getElementById("upd_image_button").style.display = "none";
   }
-
 </script>
 
 {% extends "base_old.html" %}
@@ -17,8 +16,11 @@
 {% block content %}
 <h2> {{ welcome }} </h2>
 
-<!--<img src='{% static profile.image %}'>-->
+{% if not profile.image %}
+<p>Oops! You don't have a profile picture yet! Click the link below to add one.</p>
+{% else %}
 <img src='{{ profile.image.url }}'>
+{% endif %}
 
 <h2>Your profile</h2>
 Username: {{ profile.user.username }}

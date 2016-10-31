@@ -18,4 +18,10 @@ class SignupForm(forms.Form):
 
 
 class UpdateProfilePictureForm(forms.Form):
-        image = forms.ImageField()
+    image = forms.ImageField()
+
+class CreatePostForm(forms.Form):
+    image = forms.ImageField()
+    caption = forms.CharField(label='Caption', max_length=100)
+    lat = forms.DecimalField(max_digits=8, decimal_places=5)
+    lon = forms.DecimalField(max_digits=8, decimal_places=5)

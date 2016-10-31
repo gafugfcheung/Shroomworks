@@ -1,0 +1,122 @@
+<script>
+    function onOpen() {
+      getLocation();
+    }
+
+    function getMiniMap(position) {
+      var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=LATITUDE,LONGITUDE&zoom=14&size=300x300&markers=color:blue|LATITUDE,LONGITUDE&key=AIzaSyCoGpZQdMzmoahBt27dvZDWNlPdeCagig8";
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      mapUrl = mapUrl.replace('LATITUDE', lat);
+      mapUrl = mapUrl.replace('LATITUDE', lat);
+      mapUrl = mapUrl.replace('LONGITUDE', lon);
+      mapUrl = mapUrl.replace('LONGITUDE', lon);
+      document.getElementById("minimap").src = mapUrl;
+    }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+      }
+      else {
+          document.getElementById("position").innerHTML = "Geolocation is not supported by this browser.";
+      }
+
+      function showPosition(position) {
+          document.getElementById("id_lat").value = position.coords.latitude;
+          document.getElementById("id_lon").value = position.coords.longitude;
+          getMiniMap(position);
+      }
+
+      function showError(error) {
+          switch(error.code) {
+              case error.PERMISSION_DENIED:
+                  document.getElementById("position").innerHTML = "User denied the request for Geolocation."
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  document.getElementById("position").innerHTML = "Location information is unavailable."
+                  break;
+              case error.TIMEOUT:
+                  document.getElementById("position").innerHTML = "The request to get user location timed out."
+                  break;
+              case error.UNKNOWN_ERROR:
+                  document.getElementById("position").innerHTML = "An unknown error occurred."
+                  break;
+          }
+      }
+    }
+
+    // function readURL(input) {
+    //     if (input.files && input.files[0]) {
+    //       var reader = new FileReader();
+    //       reader.onload = function (e) {
+    //           $('#preview').attr('src', e.target.result);
+    //       }
+    //       reader.readAsDataURL(input.files[0]);
+    //     }
+    //   }
+    //   $("#id_image").change(function(){
+    //       readURL(this);
+    //   });
+
+
+    function handleFileSelect(evt) {
+       var files = evt.target.files; // FileList object
+
+       // Loop through the FileList and render image files as thumbnails.
+       for (var i = 0, f; f = files[i]; i++) {
+
+         // Only process image files.
+         if (!f.type.match('image.*')) {
+           continue;
+         }
+
+         var reader = new FileReader();
+
+         // Closure to capture the file information.
+         reader.onload = (function(theFile) {
+           return function(e) {
+             // Render thumbnail.
+            //  var span = document.createElement('span');
+            //  span.innerHTML = ['<img class="thumb" src="', e.target.result,
+            //                    '" title="', escape(theFile.name), '"/>'].join('');
+            //  document.getElementById('list').insertBefore(span, null);
+           };
+         })(f);
+
+         // Read in the image file as a data URL.
+         reader.readAsDataURL(f);
+         document.getElementById('id_image').src = reader.readAsDataURL(f);
+       }
+     }
+
+     document.getElementById('id_image').addEventListener('change', handleFileSelect);
+
+     function test() {
+       document.getElementById("test").style.display = "block";
+       document.getElementById('id_image').addEventListener('change', handleFileSelect);
+     }
+</script>
+
+{% extends "base_old.html" %}
+
+{% block content %}
+<body onload="getLocation()">
+
+<h2>Create your post:</h2>
+{{ err_msg }}
+
+<img id="minimap" src=''>
+<br>
+<img id="preview" src="#" alt="Your new post" heigth="300" width="300">
+
+<button onclick="test()">test</button>
+<div id="test" style="display:none">Image added!</div>
+
+<form action="create_post" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Post!">
+</form>
+
+{% endblock content %}
