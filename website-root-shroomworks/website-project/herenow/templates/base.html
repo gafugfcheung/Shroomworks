@@ -6,9 +6,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
 
+
+  </head>
+  <body onLoad="getLocation()">
+    <script>
+      var urlCockfosters = "{% static "images/Cockfosters.jpg" %}";
+      var urlMoorgate = "{% static "images/moorgate.jpg" %}";
+    </script>
+    <script id="includeShroom" type="text/javascript" src="{% static 'js/shroomfunctions.js' %}" urlCockfosters = "{% static "images/Cockfosters.jpg" %}" urlMoorgate = "{% static "images/moorgate.jpg" %}"></script>
     {% block content %} {% endblock %}
 
   </body>
