@@ -94,12 +94,6 @@
   <canvas id="canvas" width="400" height="300"></canvas>
 </div>
 
-<form id="update_pic_form" action="update_image_base64" method="post">
-  {% csrf_token %}
-  {{ form_pic.as_p }}
-  <input type="submit" value="Post profile picture!">
-</form>
-
 <br>
 
 <form action="create_post" method="post">

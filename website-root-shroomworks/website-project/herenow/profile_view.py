@@ -75,9 +75,10 @@ def profile(request):
     if current_user.is_authenticated:
         current_profile = Profile.objects.get(user=current_user)
         welcome = request.GET.get('welcome', '')
+        form_pic = UpdateProfilePictureFormBase64()
         if welcome == 'True':
             welcome = "Welcome!"
-        return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': welcome})
+        return render_to_response('myprofile.html', {'form_pic': form_pic, 'profile': current_profile, 'welcome': welcome})
     else:
         return redirect('login_screen/')
 
@@ -107,36 +108,29 @@ def update_status(request):
 def update_image(request):
     current_user = request.user
     if current_user.is_authenticated:
+        current_profile = Profile.objects.get(user=current_user)
         form = UpdateProfilePictureForm(request.POST, request.FILES)
         if form.is_valid():
-            current_profile = Profile.objects.get(user=current_user)
-            current_profile.image.delete(save=True)
-            current_profile.image = form.cleaned_data['image']
-            current_profile.save()
+            update_profile_image(current_profile, form.cleaned_data['image'])
             return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
         else:
             return HttpResponse('Invalid form!')
 
 @csrf_exempt
 def update_image_base64(request):
-    print 'entering update function'
     current_user = request.user
     if current_user.is_authenticated:
+        current_profile = Profile.objects.get(user=current_user)
         dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
         ImageData = request.POST.get('image_b64')
         ImageData = dataUrlPattern.match(ImageData).group(2)
-        # If none or len 0, means illegal image data
         if ImageData == None or len(ImageData) == 0:
-            # PRINT ERROR MESSAGE HERE
-            print "invalid size"
-            pass
-        # Decode the 64 bit string into 32 bit
+            return HttpResponse('Error receiving picture!')
         image = ContentFile(base64.b64decode(ImageData), current_user.username + ".jpeg")
-        print 'user is authenticated'
-        current_profile = Profile.objects.get(user=current_user)
-        current_profile.image.delete(save=True)
-        current_profile.image = image
-        print 'copying data to profile'
-        current_profile.save()
-        print 'data saved'
+        update_profile_image(current_profile, image)
         return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
+
+def update_profile_image(current_profile, image):
+    current_profile.image.delete(save=True)
+    current_profile.image = image
+    current_profile.save()
