@@ -23,4 +23,4 @@ class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     caption = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="posts", height_field='1400', width_field='1050')
+    image = models.ImageField(upload_to="posts", height_field=None, width_field=None)

@@ -1,8 +1,10 @@
 <script>
     function onOpen() {
       getLocation();
+      run_webcam();
     }
 
+    // gps functions
     function getMiniMap(position) {
       var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=LATITUDE,LONGITUDE&zoom=14&size=400x300&markers=color:blue|LATITUDE,LONGITUDE&key=AIzaSyCoGpZQdMzmoahBt27dvZDWNlPdeCagig8";
       var lat = position.coords.latitude;
@@ -46,17 +48,20 @@
       }
     }
 
-    // Get access to the camera!
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // camera functions
+    function run_webcam() {
+      // Get access to the camera!
+      if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-            document.getElementById('video').src = window.URL.createObjectURL(stream);
-            document.getElementById('video').play();
+          document.getElementById('video').src = window.URL.createObjectURL(stream);
+          document.getElementById('video').play();
         });
+      }
     }
 
     // Trigger photo take
     function snap() {
-    	document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
+      document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
       document.getElementById('take_pic').style.display = 'none';
       document.getElementById('show_pic').style.display = 'block';
       document.getElementById('id_image_b64').value = document.getElementById('canvas').toDataURL("image/png");
@@ -67,12 +72,13 @@
       document.getElementById('show_pic').style.display = 'none';
     }
 
+
 </script>
 
 {% extends "base_old.html" %}
 
 {% block content %}
-<body onload="getLocation()">
+<body onload="onOpen()">
 
 <h2>Create your post:</h2>
 {{ err_msg }}
@@ -81,6 +87,29 @@
 <br>
 
 <p id="test"></p>
+
+
+<div id="take_pic" style="display:block">
+  <video id="video" width="400" height="300" autoplay></video>
+  <br>
+  <button id="snap" onclick="snap()">Snap Photo</button>
+</div>
+
+<div id="show_pic" style="display:none">
+  <canvas id="canvas" width="400" height="300"></canvas>
+  <br>
+  <button id="retake_pic" onclick="retakePicture()">Retake</button>
+</div>
+
+<form id="create_post" action="create_post" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
+
+<!--
 
 <div id="take_pic" style="display:block">
   <button id="snap" onclick="snap()">Snap Photo</button>
@@ -101,5 +130,3 @@
   {{ form.as_p }}
   <input type="submit" value="Post!">
 </form>
-
-{% endblock content %}

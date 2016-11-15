@@ -10,7 +10,7 @@ from django.contrib.auth import logout as auth_logout
 from django.views.decorators.csrf import csrf_exempt
 
 # models
-from herenow.models import Profile, Post
+from herenow.models import Profile, Post, Location
 from django.contrib.auth.models import User
 
 # forms
@@ -63,10 +63,9 @@ def login_screen(request, err_msg=""):
     return render(request, 'login_screen.html', {'form': form, 'err_msg': err_msg})
 
 
-def create_post(request, err_msg=""):
+def post(request, err_msg=""):
     form = CreatePostForm()
-    form_pic = UpdateProfilePictureFormBase64()
-    return render(request, 'new_post.html', {'form': form, 'form_pic': form_pic, 'err_msg': err_msg})
+    return render(request, 'new_post.html', {'form': form, 'err_msg': err_msg})
 
 
 # USER PROFILE
@@ -134,3 +133,27 @@ def update_profile_image(current_profile, image):
     current_profile.image.delete(save=True)
     current_profile.image = image
     current_profile.save()
+
+def create_post(request):
+    current_user = request.user
+    form = CreatePostForm(request.POST)
+    if current_user.is_authenticated:
+        if form.is_valid():
+            current_profile = Profile.objects.get(user=current_user)
+            user_location = Location.objects.create(lat=request.POST.get('lat') , lon=request.POST.get('lon'))
+            post = Post.objects.create(location=user_location, profile=current_profile)
+            post.caption = request.POST.get('caption')
+            dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+            ImageData = request.POST.get('image_b64')
+            ImageData = dataUrlPattern.match(ImageData).group(2)
+            if ImageData == None or len(ImageData) == 0:
+                return HttpResponse('Error receiving picture!')
+            image_savename = current_user.username + str(post.datetime) + ".jpeg"
+            image = ContentFile(base64.b64decode(ImageData), image_savename)
+            post.image = image
+            post.save()
+            return render('feed.html')
+        else:
+            return HttpResponse('Invalid form')
+    else:
+        return HttpResponse('Invalid user', {})
