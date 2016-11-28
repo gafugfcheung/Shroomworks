@@ -33,6 +33,9 @@ urlpatterns = [
     url(r'^post/$', profile_view.post, name='post'),
     url(r'^post/create_post$', profile_view.create_post, name='create_post'),
 
+    # test
+    url(r'^test/$', views.test, name='test'),
+
 ]
 
 if settings.DEBUG is True:

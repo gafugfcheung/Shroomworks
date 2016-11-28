@@ -20,11 +20,16 @@ class SignupForm(forms.Form):
 class UpdateProfilePictureForm(forms.Form):
     image = forms.ImageField()
 
+
 class UpdateProfilePictureFormBase64(forms.Form):
-    image_b64 = forms.CharField(widget = forms.HiddenInput())
+    image_b64 = forms.CharField(widget=forms.HiddenInput())
+
 
 class CreatePostForm(forms.Form):
     image_b64 = forms.CharField()
     caption = forms.CharField(label='Caption', max_length=100)
     lat = forms.DecimalField()
     lon = forms.DecimalField()
+
+class TestForm(forms.Form):
+    test_field = forms.CharField(label='test_field', max_length=100)

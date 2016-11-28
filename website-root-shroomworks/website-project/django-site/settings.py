@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'herenow.apps.HerenowConfig',
+    'polls.apps.PollsConfig',
     'sslserver',
 ]
 
@@ -125,5 +126,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = 'herenow/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'herenow/media/')
 
-#LOGIN_REDIRECT_URL = './login/'
+# LOGIN_REDIRECT_URL = './login/'
 LOGIN_URL = './login'

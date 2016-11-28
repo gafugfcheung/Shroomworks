@@ -1,0 +1,55 @@
+{% extends "base_old.html" %}
+
+{% block javascript %}
+  <script>
+
+  $("#id_test_field").change(function () {
+    var username = $(this).val();
+    console.log(username);
+
+    $.ajax({
+      url: '/herenow/ajax/validate_username/',
+      data: {
+        'username': username
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_taken) {
+          alert("A user with this username already exists.");
+        }
+      }
+    });
+
+  });
+
+  $("#butt").click(function () {
+    console.log("Butt clicked!");
+
+    // $.ajax({
+    //   url: '/herenow/ajax/get_ajax/',
+    //   data: {
+    //     'username': username
+    //   },
+    //   dataType: 'json',
+    //   success: function (data) {
+    //     if (data.is_taken) {
+    //       alert("A user with this username already exists.");
+    //     }
+    //   }
+    // });
+
+  });
+
+  </script>
+{% endblock %}
+
+{% block content %}
+<h2>Testing AJAX</h2>
+
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit">
+
+<button id="butt" type="button">Click Me!</button>
+
+{% endblock content %}

@@ -1,0 +1,131 @@
+<script>
+  function upd_status() {
+    document.getElementById("upd_stat").style.display = "block";
+    document.getElementById("upd_status_button").style.display = "none";
+  }
+
+  function upd_image() {
+    document.getElementById("upd_image").style.display = "block";
+    document.getElementById("upd_image_button").style.display = "none";
+    document.getElementById("show_profile_picture").style.display = "none"
+  }
+
+  function use_upload() {
+    document.getElementById("upd_upload").style.display = "block";
+    document.getElementById("upd_webcam").style.display = "none";
+  }
+
+  function use_webcam() {
+    document.getElementById("upd_webcam").style.display = "block";
+    document.getElementById("upd_upload").style.display = "none";
+    // Get access to the camera!
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        document.getElementById('video').src = window.URL.createObjectURL(stream);
+        document.getElementById('video').play();
+      });
+    }
+  }
+
+  // Trigger photo take
+  function snap() {
+    document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
+    document.getElementById('take_pic').style.display = 'none';
+    document.getElementById('show_pic').style.display = 'block';
+    document.getElementById('id_image_b64').value = document.getElementById('canvas').toDataURL("image/png");
+  };
+
+  function retakePicture() {
+    document.getElementById('take_pic').style.display = 'block';
+    document.getElementById('show_pic').style.display = 'none';
+  }
+
+</script>
+
+{% extends "base_old.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<h2> {{ welcome }} </h2>
+
+
+<!-- basic information display -->
+<h2>Your profile</h2>
+Username: {{ profile.user.username }}
+<br>
+Full name: {{ profile.user.first_name }} {{ profile.user.last_name }}
+<br>
+Email: {{ profile.user.email }}
+<br>
+Status: {{ profile.status }}
+<br>
+
+<!-- update status menu -->
+<div id="upd_status_button" style="display:block">
+  <button onclick="upd_status()">Update status</button>
+</div>
+
+<div id="upd_stat" style="display:none">
+  <form action="update_status" method="post" class="dynamic-form">
+    {% csrf_token %}
+      New status here: <input type="text" name="status"><br>
+    <button type="input">Submit</button>
+  </form>
+</div>
+
+<!-- shows profile picture -->
+<div id="show_profile_picture" style="display:block">
+  {% if not profile.image %}
+  <p>Oops! You don't have a profile picture yet! Click the link below to add one.</p>
+  {% else %}
+  <img src='{{ profile.image.url }}' width="300" height="auto">
+  {% endif %}
+</div>
+
+<!-- update picture menu -->
+<div id="upd_image_button" style="display:block">
+  <button onclick="upd_image()">Update profile picture</button>
+</div>
+
+<div id="upd_image" style="display:none">
+  <div id="upd_upload" style="display:block">
+    <button onclick="use_webcam()">Use webcam</button>
+    <form action="update_image" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      Upload picture: <input type="file" name="image" accept="image/*">
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div id="upd_webcam" style="display:none">
+    <button onclick="use_upload()">Select file</button>
+
+      <div id="take_pic" style="display:block">
+        <button id="snap" onclick="snap()">Snap Photo</button>
+        <br>
+        <video id="video" width="400" height="300" autoplay></video>
+      </div>
+
+      <div id="show_pic" style="display:none">
+        <button id="retake_pic" onclick="retakePicture()">Retake</button>
+        <br>
+        <canvas id="canvas" width="400" height="300"></canvas>
+      </div>
+
+      <form id="update_pic_form" action="update_image_base64" method="post">
+        {% csrf_token %}
+        {{ form_pic.as_p }}
+        <br>
+        <input type="submit" value="Submit">
+      </form>
+  </div>
+</div>
+
+<!-- logout button -->
+<br>
+<form action="logout" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
+
+{% endblock content %}

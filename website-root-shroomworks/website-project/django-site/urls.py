@@ -18,5 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^herenow/', include('herenow.urls', namespace="herenow")),
+    url(r'^polls/', include('polls.urls', namespace="polls")),
+    url(r'^api/', include('api.urls', namespace="api")),
     url(r'^admin/', admin.site.urls),
 ]

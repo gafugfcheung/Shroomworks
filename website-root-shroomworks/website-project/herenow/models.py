@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from django.conf import settings
 
+
 class Profile(models.Model):
     created_datetime = models.DateTimeField('date published', default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
