@@ -1,0 +1,46 @@
+{% extends "base_old.html" %}
+
+{% block content %}
+<h2> {{ welcome }} </h2>
+
+<!-- basic information display -->
+
+  <form>
+    Select post id:<br>
+    <input type="text" id="post_id" value="">
+    <br>
+    <input type="button" value="Get" onclick="getPost()">
+  </form>
+
+  <div id="post-info">
+    <h2>Your post</h2>
+    Caption: %post.caption%
+    <br>
+    <image src=%post.image%></image>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  function getPost() {
+    var id = document.getElementById("post_id").value;
+    console.log("Getting post id:" + id);
+    var post_url = '/api/get_post/' + id;
+    $.ajax({
+      url: post_url,
+      type: "GET",
+      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success : function(data) {
+          var content = "<h2>Your post</h2>Caption: %post.caption%<br><image src=%post.image%></image>";
+          content = content.replace("%post.caption%", data.caption);
+          content = content.replace("%post.image%", data.image);
+          document.getElementById("post-info").innerHTML = content;
+       }
+    });
+  }
+
+  $(document).ready(function() {
+    console.log("Ready!");
+  });
+</script>
+{% endblock %}

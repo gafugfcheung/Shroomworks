@@ -3,3 +3,13 @@
 {% block content %}
 <h1>Welcome to herenow app!</h1>
 {% endblock %}
+
+{% block javascript %}
+<script>
+  console.log("Script loaded!");
+
+  $(document).ready(function() {
+      console.log("Ready!");
+  });
+</script>
+{% endblock %}

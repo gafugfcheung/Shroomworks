@@ -21,6 +21,7 @@ urlpatterns = [
 
     # profile
     url(r'^profile$', profile_view.profile, name='profile'),
+    url(r'^myprofile$', profile_view.profile_view, name='myprofile'),
     url(r'^logout$', profile_view.logout, name='logout'),
     url(r'^update_status$', profile_view.update_status, name='update_status'),
     url(r'^update_image$', profile_view.update_image, name='update_image'),
@@ -31,6 +32,8 @@ urlpatterns = [
 
     # post
     url(r'^post/$', profile_view.post, name='post'),
+    url(r'^posts_list/$', views.posts_list, name='posts_list'),
+    url(r'^view_post/$', views.view_post, name='view_post'),
     url(r'^post/create_post$', profile_view.create_post, name='create_post'),
 
     # test

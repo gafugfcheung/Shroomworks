@@ -8,7 +8,7 @@
     console.log(username);
 
     $.ajax({
-      url: '/herenow/ajax/validate_username/',
+      url: '/api/validate_username/',
       data: {
         'username': username
       },
@@ -22,22 +22,15 @@
 
   });
 
-  $("#butt").click(function () {
-    console.log("Butt clicked!");
-
-    // $.ajax({
-    //   url: '/herenow/ajax/get_ajax/',
-    //   data: {
-    //     'username': username
-    //   },
-    //   dataType: 'json',
-    //   success: function (data) {
-    //     if (data.is_taken) {
-    //       alert("A user with this username already exists.");
-    //     }
-    //   }
-    // });
-
+  $("#butt:button").click(function () {
+    $.ajax({
+      url: '/api/get_ajax/',
+      type: "POST",
+      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success : function(data) {
+           $('div.ajax').html(data);
+       }
+    });
   });
 
   </script>
@@ -51,5 +44,7 @@
 <input type="submit" value="Submit">
 
 <button id="butt" type="button">Click Me!</button>
+
+<div class="ajax">No update yet</div>
 
 {% endblock content %}

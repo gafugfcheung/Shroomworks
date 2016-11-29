@@ -2,6 +2,7 @@
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import loader
+from django.template.loader import render_to_string
 
 # django
 from django.contrib.auth import authenticate
@@ -148,12 +149,16 @@ def create_post(request):
             ImageData = dataUrlPattern.match(ImageData).group(2)
             if ImageData == None or len(ImageData) == 0:
                 return HttpResponse('Error receiving picture!')
-            image_savename = current_user.username + str(post.datetime) + ".jpeg"
+            image_savename = current_user.username + post.datetime.strftime('%Y-%m-%d %H:%M') + ".jpeg"
             image = ContentFile(base64.b64decode(ImageData), image_savename)
             post.image = image
             post.save()
-            return render('feed.html')
+            return render('myprofile.html')
         else:
             return HttpResponse('Invalid form')
     else:
         return HttpResponse('Invalid user', {})
+
+def profile_view(request):
+    html = render_to_string('myprofile.html')
+    return HttpResponse(html)

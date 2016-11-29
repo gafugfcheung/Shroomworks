@@ -40,3 +40,11 @@ def feed(request):
 def test(request):
     form = TestForm()
     return render(request, 'test.html', {'form': form})
+
+
+def view_post(request):
+    return render(request, 'view_post.html')
+
+
+def posts_list(request):
+    return render(request, 'view_post.html')

@@ -16,13 +16,14 @@
           <h1>Herenow app</h1>
           <a href="/herenow/index_old">Home</a>
           <br>
-          <a href="/herenow/profile">My profile</a>
+          <button id="myprofile" type="button">My profile</button>
           <br>
           <a href="/herenow/feed">What's new</a>
         </div>
 
         <!-- defines body -->
-        <div class="body">
+        <div class="main-content">
+          {# <p>Loading content...</p>#}
           {% block content %} {% endblock %}
         </div>
       </div>
@@ -36,3 +37,18 @@
   </body>
 
 </html>
+
+<script>
+
+$("#myprofile:button").click(function () {
+  $.ajax({
+    url: '/herenow/myprofile',
+    type: "GET",
+    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+    success : function(data) {
+         $('div.main-content').html(data);
+     }
+  });
+});
+
+</script>
