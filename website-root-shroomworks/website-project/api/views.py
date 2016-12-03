@@ -5,12 +5,6 @@ from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect, HttpResponse
 from herenow.models import Post
 from django.core import serializers
-
-
-from django.utils.encoding import force_text
-from django.core.serializers.json import DjangoJSONEncoder
-from django.core.serializers import serialize
-
 # Create your views here.
 
 def validate_username(request):
@@ -54,15 +48,8 @@ def get_post(request, pk):
     return JsonResponse(data)
 
 
-class LazyEncoder(DjangoJSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Post):
-            return force_text(obj)
-            return super(LazyEncoder, self).default(obj)
-
-
 def get_post_all(request):
-    leads_as_json = serializers.serialize('json', Post.objects.all(), cls=LazyEncoder)
+    leads_as_json = serializers.serialize('json', Post.objects.all())
     return HttpResponse(leads_as_json, content_type='json')
 
 
