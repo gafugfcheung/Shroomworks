@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  </head>
+  <body onLoad="getLocation()">
+    <script>
+      var urlCockfosters = "images/Cockfosters.jpg";
+      var urlMoorgate = "images/moorgate.jpg";
+    </script>
+    <script id="includeShroom" type="text/javascript" src="js/shroomfunctions.js" urlCockfosters = "images/Cockfosters.jpg" urlMoorgate = "images/moorgate.jpg"></script>
+
+    <nav class="navbar navbar-inverse nomargin navbar-fixed-top navbar-custom">
+      <div id="navbar-left">
+        <div id="navbar-logo">LENS</div>
+        <div id="navbar-search">Search</div>
+        <div id="navbar-download">Download</div>
+      </div>
+      <div id="navbar-right">
+        <div id="navbar-profile">
+          <img id="navbar-profile-pic" src="images/cj.jpg">
+          <div id="navbar-info">
+            <div id="navbar-username">Carl Johnson</div>
+            <div id="navbar-edit"><a href="#">Manage Profile</a> | <a href="#">Sign Out</a></div>
+          </div>
+
+        </div>
+
+        <div id="navbar-business">Business</div>
+      </div>
+
+    </nav>
+
+    <div class="container-fluid nomargin">
+
+      <div id="mapstyle">
+        <div id="map">
+        <script>
+          function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 3,
+              center: {lat: 50.0, lng: 0.0}
+            });
+            for (var m in markers) {
+              var marker = new google.maps.Marker({
+                position: {lat: markers[m].lat, lng: markers[m].lng},
+                label: m.toString(),
+                shroom_id: m,
+                map: map
+              });
+              marker.addListener('click', function() {
+                markerClicked(this.shroom_id);
+              });
+            }
+          }
+          </script>
+          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0&callback=initMap">
+          </script>
+        </div>
+      </div>
+
+      <div id="newsfeed">
+        <div class="newsfeed-item">
+          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <div class="newsfeed-item-topbar">
+            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
+            <div class="newsfeed-item-title">Title</div>
+            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
+          </div>
+          <div class="newsfeed-item-bottombar">
+            <div class="newsfeed-item-likes">Likes</div>
+          </div>
+        </div>
+
+        <div class="newsfeed-item">
+          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <div class="newsfeed-item-topbar">
+            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
+            <div class="newsfeed-item-title">Title</div>
+            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
+          </div>
+          <div class="newsfeed-item-bottombar">
+            <div class="newsfeed-item-likes">Likes</div>
+          </div>
+        </div>
+
+        <div class="newsfeed-item">
+          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <div class="newsfeed-item-topbar">
+            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
+            <div class="newsfeed-item-title">Title</div>
+            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
+          </div>
+          <div class="newsfeed-item-bottombar">
+            <div class="newsfeed-item-likes">Likes</div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+    </div>
+
+    </body>
+</html>
