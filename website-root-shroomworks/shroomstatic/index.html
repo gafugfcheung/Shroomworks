@@ -5,9 +5,114 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0&callback=initMap"></script>
+    <script>
+
+    var overlay;
+    USGSOverlay.prototype = new google.maps.OverlayView();
+
+    // Initialize the map and the custom overlay.
+
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: {lat: 62.323907, lng: -150.109291},
+        mapTypeId: 'satellite'
+      });
+
+      var bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(62.281819, -150.287132),
+          new google.maps.LatLng(62.400471, -150.005608));
+
+      // The photograph is courtesy of the U.S. Geological Survey.
+      var srcImage = 'https://developers.google.com/maps/documentation/' +
+          'javascript/examples/full/images/talkeetna.png';
+
+      // The custom USGSOverlay object contains the USGS image,
+      // the bounds of the image, and a reference to the map.
+      overlay = new USGSOverlay(bounds, srcImage, map);
+    }
+
+    /** @constructor */
+    function USGSOverlay(bounds, image, map) {
+
+      // Initialize all properties.
+      this.bounds_ = bounds;
+      this.image_ = image;
+      this.map_ = map;
+
+      // Define a property to hold the image's div. We'll
+      // actually create this div upon receipt of the onAdd()
+      // method so we'll leave it null for now.
+      this.div_ = null;
+
+      // Explicitly call setMap on this overlay.
+      this.setMap(map);
+    }
+
+    /**
+     * onAdd is called when the map's panes are ready and the overlay has been
+     * added to the map.
+     */
+    USGSOverlay.prototype.onAdd = function() {
+
+      var div = document.createElement('div');
+      div.id = "abcdiv";
+      div.style.borderStyle = 'none';
+      div.style.borderWidth = '0px';
+      div.style.position = 'absolute';
+      div.style.border-radius = 100%;
+
+      // Create the img element and attach it to the div.
+      var img = document.createElement('img');
+      img.src = this.image_;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.position = 'absolute';
+      div.appendChild(img);
+
+      this.div_ = div;
+
+      // Add the element to the "overlayLayer" pane.
+      var panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+    };
+
+    USGSOverlay.prototype.draw = function() {
+
+      // We use the south-west and north-east
+      // coordinates of the overlay to peg it to the correct position and size.
+      // To do this, we need to retrieve the projection from the overlay.
+      var overlayProjection = this.getProjection();
+
+      // Retrieve the south-west and north-east coordinates of this overlay
+      // in LatLngs and convert them to pixel coordinates.
+      // We'll use these coordinates to resize the div.
+      var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+      var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+
+      // Resize the image's div to fit the indicated dimensions.
+      var div = this.div_;
+      div.style.left = sw.x + 'px';
+      div.style.top = ne.y + 'px';
+      div.style.width = (ne.x - sw.x) + 'px';
+      div.style.height = (sw.y - ne.y) + 'px';
+    };
+
+    // The onRemove() method will be called automatically from the API if
+    // we ever set the overlay's map property to 'null'.
+    USGSOverlay.prototype.onRemove = function() {
+      this.div_.parentNode.removeChild(this.div_);
+      this.div_ = null;
+    };
+
+    google.maps.event.addDomListener(window, 'load', initMap);
+
+
+    </script>
 
   </head>
-  <body onLoad="getLocation()">
+  <body>
     <script>
       var urlCockfosters = "images/Cockfosters.jpg";
       var urlMoorgate = "images/moorgate.jpg";
@@ -16,9 +121,11 @@
 
     <nav class="navbar navbar-inverse nomargin navbar-fixed-top navbar-custom">
       <div id="navbar-left">
-        <div id="navbar-logo">LENS</div>
-        <div id="navbar-search">Search</div>
-        <div id="navbar-download">Download</div>
+        <div id="navbar-logo">(o) LENS</div>
+        <div id="navbar-search">
+          <input type="text" placeholder="Search the world">
+        </div>
+        <div id="navbar-download">Download LENS mobile application</div>
       </div>
       <div id="navbar-right">
         <div id="navbar-profile">
@@ -30,7 +137,10 @@
 
         </div>
 
-        <div id="navbar-business">Business</div>
+        <div id="navbar-business">
+          <div id="navbar-business-logo">LENS</div>
+          <div id="navbar-edit">Business</div>
+        </div>
       </div>
 
     </nav>
@@ -38,34 +148,14 @@
     <div class="container-fluid nomargin">
 
       <div id="mapstyle">
-        <div id="map">
-        <script>
-          function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 3,
-              center: {lat: 50.0, lng: 0.0}
-            });
-            for (var m in markers) {
-              var marker = new google.maps.Marker({
-                position: {lat: markers[m].lat, lng: markers[m].lng},
-                label: m.toString(),
-                shroom_id: m,
-                map: map
-              });
-              marker.addListener('click', function() {
-                markerClicked(this.shroom_id);
-              });
-            }
-          }
-          </script>
-          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0&callback=initMap">
-          </script>
-        </div>
+
+
+        <div id="map"></div>
       </div>
 
       <div id="newsfeed">
         <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <img class="newsfeed-photo" src="images/silverback.jpg">
           <div class="newsfeed-item-topbar">
             <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
             <div class="newsfeed-item-title">Title</div>
@@ -77,7 +167,7 @@
         </div>
 
         <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <img class="newsfeed-photo" src="images/monkey.jpg">
           <div class="newsfeed-item-topbar">
             <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
             <div class="newsfeed-item-title">Title</div>
@@ -89,7 +179,7 @@
         </div>
 
         <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="images/cockfosters.jpg">
+          <img class="newsfeed-photo" src="images/small.jpg">
           <div class="newsfeed-item-topbar">
             <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
             <div class="newsfeed-item-title">Title</div>

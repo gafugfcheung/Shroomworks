@@ -33,7 +33,7 @@ function shroomHTML(shroom_id) {
   result += '</div></div>';
   return result;
 }
-
+/*
 function getLocation() {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -59,3 +59,4 @@ function getLocation() {
       }
   }
 }
+*/
