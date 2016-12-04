@@ -5,7 +5,7 @@ function addShroom(id, lat, lng, radiusInKm) {
   var pointB = centerPoint.destinationPoint(45, radiusInKm);
   var bounds = new google.maps.LatLngBounds(pointA, pointB);
 
-  var srcImage = 'static/images/lsdlarge.jpg';
+  var srcImage = 'images/lsdlarge.jpg';
 
   var newShroom = new shroomOverlay(bounds, srcImage, map);
 
@@ -22,7 +22,7 @@ function removeShroom(id) {
 }
 
 function shroomClicked(id) {
-  var src = 'static/images/lsdlarge.jpg';
+  var src = 'images/lsdlarge.jpg';
   displayFullScreen(id, src);
 }
 
