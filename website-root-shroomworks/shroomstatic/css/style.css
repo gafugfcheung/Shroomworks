@@ -1,0 +1,230 @@
+@font-face {
+    font-family: Montserrat Light;
+    src: url(../fonts/Montserrat-Light.otf);
+}
+
+body {
+  font-family: Montserrat Light, 'Montserrat', sans-serif !important;
+  color: black !important;
+}
+
+a {
+  color: #555 !important;
+}
+
+#mapstyle {
+  width: 100%;
+  position:fixed;
+  height: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+#newsfeed {
+  width:560px;
+  background: white;
+  right: 0;
+  float: right;
+  padding-top: 70px;
+  position: absolute;
+  font-family: 'Montserrat', sans-serif !important;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
+
+.newsfeed-item {
+  margin: 12px;
+  width: calc(100% - 24px);
+  position: relative;
+}
+
+.newsfeed-item-minor {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.newsfeed-item-topbar {
+  width: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  height: 32px;
+  position: absolute;
+  color: white;
+  padding: 6px;
+}
+
+.newsfeed-item-location {
+  float: left;
+}
+
+.newsfeed-item-title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsfeed-item-time {
+  float: right;
+}
+
+.newsfeed-item-bottombar {
+  width: 100%;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  height: 32px;
+  position: absolute;
+  color: white;
+  padding: 6px;
+}
+
+.newsfeed-item-likes {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsfeed-photo {
+  width: 100%;
+}
+
+.nomargin {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.news-item {
+  margin: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  opacity: 0.85;
+}
+
+.news-item:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.news-image {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#news-description {
+  color: #444;
+  padding-top: 6px;
+}
+
+.image-form {
+  margin: 12px;
+  color: white;
+}
+
+.navbar-custom {
+  background: #ccc !important;
+  border: 0 !important;
+  min-height: 70px !important;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
+
+.horizontal-form {
+  display: inline !important;
+  color: black;
+}
+
+#navbar-left {
+  float: left;
+  width: calc(100% - 560px);
+  position: relative;
+}
+
+#navbar-logo {
+  float: left;
+  font-size: 40px;
+  padding: 15px;
+  height: 100%;
+  line-height: 1 !important;
+}
+
+#navbar-search {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 19px;
+  padding-bottom: 19px;
+}
+
+input {
+  padding: 4px;
+  border: 2px solid #888;
+  border-radius: 3px;
+}
+
+#navbar-download {
+  float: right;
+}
+
+#navbar-right {
+  float: right;
+  width: 560px;
+}
+
+#navbar-profile {
+  float: left;
+}
+
+#navbar-profile-pic {
+  height: 56px;
+  width: 56px;
+  margin: 7px;
+  margin-left: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  float: left;
+}
+
+#navbar-info {
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 12px;
+}
+
+#navbar-username {
+  font-size: 20px;
+}
+
+#navbar-edit {
+  font-size: 14px;
+}
+
+#navbar-business {
+  float: right;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+}
+
+#navbar-business-logo {
+  font-size: 21px;
+}
+
+#navbar-edit {
+  font-size: 13px;
+}
+
+#abcdiv {
+  border-radius: 100%;
+}
