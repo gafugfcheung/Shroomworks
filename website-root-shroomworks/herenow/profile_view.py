@@ -1,3 +1,6 @@
+# python
+from datetime import datetime
+
 # http
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse
@@ -21,6 +24,12 @@ from .forms import LoginForm, SignupForm, UpdateProfilePictureForm, CreatePostFo
 import re
 import base64
 from django.core.files.base import ContentFile
+
+
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.serializers import PostSerializer
 
 
 
@@ -153,11 +162,12 @@ def create_post(request):
             image = ContentFile(base64.b64decode(ImageData), image_savename)
             post.image = image
             post.save()
-            return render('myprofile.html')
+            return render_to_response('myprofile.html', {'profile': current_profile, 'welcome': ''})
         else:
             return HttpResponse('Invalid form')
     else:
         return HttpResponse('Invalid user', {})
+
 
 def profile_view(request):
     html = render_to_string('myprofile.html')

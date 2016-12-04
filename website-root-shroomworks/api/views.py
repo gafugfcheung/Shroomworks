@@ -7,6 +7,27 @@ from herenow.models import Post
 from django.core import serializers
 # Create your views here.
 
+from rest_framework import viewsets
+from api.serializers import UserSerializer, PostSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('date_joined')
+    serializer_class = UserSerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows posts to be viewed or edited.
+    """
+    queryset = Post.objects.all().order_by('id')
+    serializer_class = PostSerializer
+
+
+
 def validate_username(request):
     username = request.GET.get('username', None)
     data = {

@@ -72,7 +72,17 @@
       document.getElementById('show_pic').style.display = 'none';
     }
 
-
+    function createPost() {
+      var url = '/herenow/post/create_post';
+      var data = document.getElementById();
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: success,
+        dataType: dataType
+      });
+    }
 </script>
 
 {% extends "base_old.html" %}
@@ -108,25 +118,3 @@
 </form>
 
 {% endblock content %}
-
-<!--
-
-<div id="take_pic" style="display:block">
-  <button id="snap" onclick="snap()">Snap Photo</button>
-  <br>
-  <video id="video" width="400" height="300" autoplay></video>
-</div>
-
-<div id="show_pic" style="display:none">
-  <button id="retake_pic" onclick="retakePicture()">Retake</button>
-  <br>
-  <canvas id="canvas" width="400" height="300"></canvas>
-</div>
-
-<br>
-
-<form action="create_post" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Post!">
-</form>

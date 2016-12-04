@@ -1,9 +1,16 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from . import views
 
 from django.conf import settings
 from django.conf.urls.static import static
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'posts', views.PostViewSet)
+
 
 app_name = 'herenow'
 urlpatterns = [
@@ -15,6 +22,9 @@ urlpatterns = [
     url(r'^get_profile/(?P<pk>[0-9]+)/$', views.get_profile, name='get_profile'),
     url(r'^get_post/(?P<pk>[0-9]+)/$', views.get_post, name='get_post'),
     url(r'^get_post_all/$', views.get_post_all, name='get_post_all'),
+
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]
 

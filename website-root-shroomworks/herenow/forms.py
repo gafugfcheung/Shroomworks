@@ -31,5 +31,6 @@ class CreatePostForm(forms.Form):
     lat = forms.DecimalField()
     lon = forms.DecimalField()
 
+
 class TestForm(forms.Form):
     test_field = forms.CharField(label='test_field', max_length=100)
