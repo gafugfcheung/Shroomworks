@@ -42,16 +42,18 @@ function addToNewsFeed(newContent) {
 function shroomHTML(src, location, title, time, likes) {
 
   var content = "";
-  <div class="newsfeed-item">
-    <img class="newsfeed-photo" src="{% static 'images/silverback.jpg' %}">
-    <div class="newsfeed-item-topbar">
-      <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
-      <div class="newsfeed-item-title">Title</div>
-      <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
-    </div>
-    <div class="newsfeed-item-bottombar">
-      <div class="newsfeed-item-likes">Likes</div>
-    </div>
-  </div>
+  content += '<div class="newsfeed-item"><img class="newsfeed-photo" src="';
+  content += src;
+  content += '"><div class="newsfeed-item-topbar"><div class="newsfeed-item-location newsfeed-item-minor">';
+  content += location;
+  content += '</div><div class="newsfeed-item-title">';
+  content += title;
+  content += '</div><div class="newsfeed-item-time newsfeed-item-minor">';
+  content += time;
+  content += '</div></div><div class="newsfeed-item-bottombar"><div class="newsfeed-item-likes">';
+  content += likes;
+  content += '</div></div></div>';
+
+  addToNewsFeed(content);
 
 }
