@@ -74,13 +74,15 @@
 
     function createPost() {
       var url = '/herenow/post/create_post';
-      var data = document.getElementById();
+      var data = document.getElementById('create_post');
+      console.log("Sending ajax post");
+      console.log(data);
       $.ajax({
         type: "POST",
         url: url,
         data: data,
-        success: success,
-        dataType: dataType
+        success: null,
+        dataType: null
       });
     }
 </script>
@@ -114,7 +116,7 @@
 <form id="create_post" action="create_post" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="Submit">
+  <button id="create_post_button" onclick="createPost()">Send</button>
 </form>
 
 {% endblock content %}

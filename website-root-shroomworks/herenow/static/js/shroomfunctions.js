@@ -1,68 +1,36 @@
-var markers = {};
-const TOTAL_MARKERS = 100;
-var urlCockfosters = document.getElementById("includeShroom").getAttribute("urlCockfosters");
-var urlMoorgate = document.getElementById("includeShroom").getAttribute("urlMoorgate");
+function addShroom(id, lat, lng, radiusInKm) {
+  var centerPoint = new google.maps.LatLng(lat, lng);
 
-// TODO: Get ID and coords from DB and loop into the array
+  var pointA = centerPoint.destinationPoint(225, radiusInKm);
+  var pointB = centerPoint.destinationPoint(45, radiusInKm);
+  var bounds = new google.maps.LatLngBounds(pointA, pointB);
 
-for (var id = 0; id < TOTAL_MARKERS; id++) {
-  var random_lat = (Math.random()-0.5) * 170;
-  var random_lng = (Math.random()-0.5) * 360;
-  markers[id] = {lat: random_lat, lng: random_lng};
+  var srcImage = 'images/lsdlarge.jpg';
+
+  var newShroom = new shroomOverlay(bounds, srcImage, map);
+
+  shroomID = id;
+  shrooms[id] = newShroom;
+  console.log("Shroom " + id + " created");
+
+  map.setCenter(centerPoint);
 }
 
-function markerClicked(shroom_id) {
-  document.getElementById("newsfeed").innerHTML = shroomHTML(shroom_id) + document.getElementById("newsfeed").innerHTML;
+function removeShroom(id) {
+  shrooms[id].setMap(null);
+  console.log("Shroom " + id + " removed");
 }
 
-function shroomHTML(shroom_id) {
-  var result = '';
-  result += '<div class="news-item"><div id="news-image">';
-  if (shroom_id % 2 == 0) {
-    result += '<img class="news-image" src="' + urlCockfosters + '">';
-  } else {
-    result += '<img class="news-image" src="' + urlMoorgate + '">';
-  }
-  result += '</div><div id="news-description">';
-  result += 'ID: ' + shroom_id + '<br>';
-  result += 'Latitude: ' + markers[shroom_id].lat + '<br>';
-  result += 'Longitude: ' + markers[shroom_id].lng + '<br>';
-  if (shroom_id % 2 == 0) {
-    result += 'This is a Picadilly line train terminating at Cockfosters.';
-  } else {
-    result += 'This station is Moorgate. Change here for Circle, Hammersmith & City and Metropolitan line, and National Rail Services.';
-  }
-  result += '</div></div>';
-  return result;
+function shroomClicked(id) {
+  var src = 'images/lsdlarge.jpg';
+  displayFullScreen(id, src);
 }
 
-function getLocation() {
-  if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-  }
-  else {
-      document.getElementById("position").innerHTML = "Geolocation is not supported by this browser.";
-  }
+function displayFullScreen(id, src) {
+  document.getElementById("fullscreen").style.display = "block";
+  document.getElementById("fullscreen-photo").src = src;
+}
 
-  function showPosition(position) {
-      document.getElementById("form-lat").value = position.coords.latitude;
-      document.getElementById("form-lng").value = position.coords.longitude;
-  }
-
-  function showError(error) {
-      switch(error.code) {
-          case error.PERMISSION_DENIED:
-              document.getElementById("position").innerHTML = "User denied the request for Geolocation."
-              break;
-          case error.POSITION_UNAVAILABLE:
-              document.getElementById("position").innerHTML = "Location information is unavailable."
-              break;
-          case error.TIMEOUT:
-              document.getElementById("position").innerHTML = "The request to get user location timed out."
-              break;
-          case error.UNKNOWN_ERROR:
-              document.getElementById("position").innerHTML = "An unknown error occurred."
-              break;
-      }
-  }
+function hideFullScreen() {
+  document.getElementById("fullscreen").style.display = "none";
 }
