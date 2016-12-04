@@ -23,80 +23,6 @@ a {
   height: 100%;
 }
 
-#newsfeed {
-  width:560px;
-  background: white;
-  right: 0;
-  float: right;
-  padding-top: 70px;
-  position: absolute;
-}
-
-.newsfeed-item {
-  margin: 12px;
-  width: calc(100% - 24px);
-  position: relative;
-}
-
-.newsfeed-item-minor {
-  padding: 3px;
-  font-size: 12px;
-}
-
-.newsfeed-item-topbar {
-  width: 100%;
-  top: 0;
-  background: rgba(0,0,0,0.5);
-  height: 32px;
-  position: absolute;
-  color: white;
-  padding: 6px;
-}
-
-.newsfeed-item-location {
-  float: left;
-}
-
-.newsfeed-item-title {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.newsfeed-item-time {
-  float: right;
-}
-
-.newsfeed-item-bottombar {
-  width: 100%;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  height: 32px;
-  position: absolute;
-  color: white;
-  padding: 6px;
-}
-
-.newsfeed-item-likes {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.newsfeed-photo {
-  width: 100%;
-}
-
-.nomargin {
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-}
-
 .news-item {
   margin: 8px;
   padding: 8px;
@@ -193,4 +119,89 @@ a {
 
 #navbar-business {
   float: right;
+  padding-top: 10px;
+  padding-bottom: 12px;
+}
+
+#navbar-business-logo {
+  font-size: 20px;
+}
+
+#navbar-edit {
+  font-size: 14px;
+}
+
+#newsfeed {
+  width:560px;
+  background: white;
+  right: 0;
+  float: right;
+  padding-top: 70px;
+  position: absolute;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.newsfeed-item {
+  margin: 12px;
+  width: calc(100% - 24px);
+  position: relative;
+}
+
+.newsfeed-item-minor {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.newsfeed-item-topbar {
+  width: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  height: 32px;
+  position: absolute;
+  color: white;
+  padding: 6px;
+}
+
+.newsfeed-item-location {
+  float: left;
+}
+
+.newsfeed-item-title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsfeed-item-time {
+  float: right;
+}
+
+.newsfeed-item-bottombar {
+  width: 100%;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  height: 32px;
+  position: absolute;
+  color: white;
+  padding: 6px;
+}
+
+.newsfeed-item-likes {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsfeed-photo {
+  width: 100%;
+}
+
+.nomargin {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
