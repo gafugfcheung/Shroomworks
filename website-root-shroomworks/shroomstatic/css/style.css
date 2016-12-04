@@ -225,6 +225,30 @@ input {
   font-size: 13px;
 }
 
-#abcdiv {
-  border-radius: 100%;
+#abcdiv:hover {
+  opacity: 0.5;
+}
+
+#fullscreen {
+  position: fixed;
+  width:100%;
+  height:100%;
+  display: none;
+}
+
+#fullscreen-bg {
+  position: fixed;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.6);
+  /*display: none;*/
+}
+
+#fullscreen-photo {
+  position: fixed;
+  max-width: 90%;
+  max-height: 90%;
+  margin-top: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
