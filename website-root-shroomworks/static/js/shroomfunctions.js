@@ -5,7 +5,7 @@ function addShroom(id, lat, lng, radiusInKm) {
   var pointB = centerPoint.destinationPoint(45, radiusInKm);
   var bounds = new google.maps.LatLngBounds(pointA, pointB);
 
-  var srcImage = 'images/lsdlarge.jpg';
+  var srcImage = 'static/images/lsdlarge.jpg';
 
   var newShroom = new shroomOverlay(bounds, srcImage, map);
 
@@ -22,7 +22,7 @@ function removeShroom(id) {
 }
 
 function shroomClicked(id) {
-  var src = 'images/lsdlarge.jpg';
+  var src = 'static/images/lsdlarge.jpg';
   displayFullScreen(id, src);
 }
 
@@ -33,4 +33,8 @@ function displayFullScreen(id, src) {
 
 function hideFullScreen() {
   document.getElementById("fullscreen").style.display = "none";
+}
+
+function addToNewsFeed(newContent) {
+  document.getElementById("newsfeed").innerHTML=newContent;
 }
