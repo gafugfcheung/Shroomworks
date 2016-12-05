@@ -17,9 +17,7 @@ class Profile(models.Model):
 class Location(models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lon = models.DecimalField(max_digits=8, decimal_places=5)
-
-    def to_representation(self, value):
-        return 'x: %f, y: %f' % (value.x, value.y)
+    description = models.CharField(max_length=100)
 
 
 class Post(models.Model):
@@ -28,3 +26,19 @@ class Post(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='location')
     caption = models.CharField(max_length=100)
     image = models.ImageField(upload_to="posts", height_field=None, width_field=None)
+
+    def time_elapsed(self):
+        timedelta = timezone.now() - self.datetime
+        seconds = timedelta.seconds
+        minutes = seconds/60
+        hours = minutes/60
+        minutes = minutes - hours*60
+        days = timedelta.days
+        if days > 0:
+            return str(days) + ' days and ' + str(hours) + ' hours ago'
+        elif hours > 0:
+            return str(hours) + ' hours and ' + str(minutes) + ' minutes ago'
+        elif minutes > 0:
+            return str(minutes) + ' minutes ago'
+        else:
+            return 'Just now'

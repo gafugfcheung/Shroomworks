@@ -12,12 +12,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('lat', 'lon')
+        fields = ('description', 'lat', 'lon')
 
 
 class PostSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     caption = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    time_elapsed = serializers.CharField(required=False, allow_blank=True, max_length=100)
     location = LocationSerializer(many=False, read_only=True)
     image = serializers.ImageField()
 
