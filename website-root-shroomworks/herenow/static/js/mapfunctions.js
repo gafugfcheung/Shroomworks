@@ -4,7 +4,7 @@ var map;
 var shroomID;
 const DEFAULT_OPACITY = 0.8;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
-const MIN_ZOOM = 3;
+const MIN_ZOOM = 1;
 
 shroomOverlay.prototype = new google.maps.OverlayView();
 
@@ -27,12 +27,10 @@ function initMap() {
   });
 
   map.addListener('zoom_changed', function() {
-    console.log("before");
     if (map.getZoom() < MIN_ZOOM) {
       console.log("zoom too low");
       map.setZoom(MIN_ZOOM);
     }
-    console.log("after");
     for (var i in shrooms) {
       shrooms[i].bounds_ = calculateBounds(shroomCenters[i]);
     }
@@ -79,9 +77,10 @@ shroomOverlay.prototype.onAdd = function() {
   var panes = this.getPanes();
   panes.overlayMouseTarget.appendChild(div);
 
-  var me = this;
   google.maps.event.addDomListener(img, 'click', function() {
-    shroomClicked(div.id);
+    console.log("id: " + div.id);
+    console.log("src: " + this.image_);
+    //shroomClicked(this.div_.id);
   });
 
   google.maps.event.addDomListener(img, 'mouseover', function() {

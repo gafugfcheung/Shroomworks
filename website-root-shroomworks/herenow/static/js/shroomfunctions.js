@@ -11,6 +11,7 @@ function addShroom(id, src, lat, lng) {
   shrooms[id] = newShroom;
   console.log("Shroom " + id + " created");
 
+  var me = this;
   map.setCenter(centerPoint);
 }
 
@@ -24,7 +25,9 @@ function removeShroom(id) {
 }
 
 function shroomClicked(id) {
-  var src = '/static/images/lsdlarge.jpg';
+  console.log("shroom " + id + " clicked");
+  var src = shrooms[id].image_;
+  console.log("src: " + src);
   displayFullScreen(id, src);
 }
 
