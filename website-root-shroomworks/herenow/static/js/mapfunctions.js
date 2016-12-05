@@ -2,15 +2,33 @@ var shrooms = {};
 var map;
 var shroomID;
 const DEFAULT_OPACITY = 0.8;
+const ICON_SIZE = 0.06; // 0.0 - 1.0
 
 shroomOverlay.prototype = new google.maps.OverlayView();
 
 // Initialize the map and the custom overlay.
 
+function calculateBounds(point) {
+  var zoomLevel = map.getZoom();
+  var radius = 100000 * ICON_SIZE;
+  for (var i = zoomLevel; i > 0; i--) {
+    radius /= 2;
+  }
+  var pointA = point.destinationPoint(225, radius);
+  var pointB = point.destinationPoint(45, radius);
+  return new google.maps.LatLngBounds(pointA, pointB);
+}
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 11,
     center: {lat: 51, lng: 0},
+  });
+
+  map.addListener('zoom_changed', function() {
+    for (var i in shrooms) {
+      shrooms[i].bounds_ = calculateBounds(shrooms[i].bounds_.getCenter());
+    }
   });
 }
 
