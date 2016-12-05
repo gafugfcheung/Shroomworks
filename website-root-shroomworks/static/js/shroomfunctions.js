@@ -1,9 +1,9 @@
-function addShroom(id, lat, lng, radiusInKm) {
+function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
 
   var bounds = calculateBounds(centerPoint);
 
-  var srcImage = '/static/images/lsdlarge.jpg';
+  var srcImage = src;
 
   var newShroom = new shroomOverlay(bounds, srcImage, map);
 
@@ -12,6 +12,10 @@ function addShroom(id, lat, lng, radiusInKm) {
   console.log("Shroom " + id + " created");
 
   map.setCenter(centerPoint);
+}
+
+function addTestShroom(lat, lng) {
+  addShroom(0, '/media/posts/test.jpeg', lat, lng);
 }
 
 function removeShroom(id) {
@@ -55,3 +59,31 @@ function shroomHTML(src, location, title, time, likes) {
   addToNewsFeed(content);
 
 }
+
+$(document).ready(function() {
+  console.log('Document ready');
+  console.log('Getting user information');
+  $.ajax({
+    url: '/api/get_profile_self',
+    type: "GET",
+    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+    success : function(data) {
+        document.getElementById('navbar-username').innerHTML = data.first_name;
+        document.getElementById('navbar-profile-pic').src = data.image;
+     }
+  });
+
+  console.log('Getting posts list');
+    $.ajax({
+      url: '/api/posts',
+      type: "GET",
+      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success : function(data) {
+        for(var d in data.results) {
+          shroomHTML(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
+          addShroom(data.results[d].id, data.results[d].image, data.results[d].location.lat, data.results[d].location.lon);
+       }
+     }
+  });
+
+})

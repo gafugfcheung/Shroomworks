@@ -1,6 +1,6 @@
 function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
-
+  shroomCenters[id] = centerPoint;
   var bounds = calculateBounds(centerPoint);
 
   var srcImage = src;
@@ -12,6 +12,10 @@ function addShroom(id, src, lat, lng) {
   console.log("Shroom " + id + " created");
 
   map.setCenter(centerPoint);
+}
+
+function addTestShroom(lat, lng) {
+  addShroom(0, '/media/posts/test.jpeg', lat, lng);
 }
 
 function removeShroom(id) {

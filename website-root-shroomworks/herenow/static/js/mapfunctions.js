@@ -1,8 +1,10 @@
 var shrooms = {};
+var shroomCenters = {};
 var map;
 var shroomID;
 const DEFAULT_OPACITY = 0.8;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
+const MIN_ZOOM = 3;
 
 shroomOverlay.prototype = new google.maps.OverlayView();
 
@@ -20,12 +22,19 @@ function calculateBounds(point) {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 11,
+    minZoom: 2,
     center: {lat: 51, lng: 0},
   });
 
   map.addListener('zoom_changed', function() {
+    console.log("before");
+    if (map.getZoom() < MIN_ZOOM) {
+      console.log("zoom too low");
+      map.setZoom(MIN_ZOOM);
+    }
+    console.log("after");
     for (var i in shrooms) {
-      shrooms[i].bounds_ = calculateBounds(shrooms[i].bounds_.getCenter());
+      shrooms[i].bounds_ = calculateBounds(shroomCenters[i]);
     }
   });
 }
