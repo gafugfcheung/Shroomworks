@@ -21,7 +21,11 @@ from .forms import LoginForm, SignupForm, TestForm
 
 # INDEX SCREEN
 def index(request):
-    return render(request, 'index.html')
+    current_user = request.user
+    if current_user.is_authenticated:
+        return render(request, 'index.html')
+    else:
+        return redirect('login_screen/')
 
 
 def index_old(request):

@@ -58,8 +58,32 @@ function shroomHTML(src, location, title, time, likes) {
 
 }
 
+$(document).ready(function() {
+  console.log('Document ready');
+  console.log('Getting user information');
+  $.ajax({
+    url: '/api/get_profile_self',
+    type: "GET",
+    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+    success : function(data) {
+        document.getElementById('navbar-username').innerHTML = data.first_name;
+        document.getElementById('navbar-profile-pic').src = data.image;
+     }
+  });
 
+  console.log('Getting posts list');
+  $.ajax({
+    url: '/api/posts',
+    type: "GET",
+    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+    success : function(data) {
+      for(var d in data) {
+        console.log(data[d].image);
+      }
+     }
+  });
 
+})
 
 
 

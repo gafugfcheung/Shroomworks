@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0&callback=initMap"></script>
     <script src="{% static 'js/mapfunctions.js' %}"></script>
     <script src="{% static 'js/shroomfunctions.js' %}"></script>
@@ -24,10 +25,10 @@
       </div>
       <div id="navbar-right">
         <div id="navbar-profile">
-          <img id="navbar-profile-pic" src="{% static 'images/cj.jpg' %}">
+          <img id="navbar-profile-pic" src="">
           <div id="navbar-info">
-            <div id="navbar-username">Carl Johnson</div>
-            <div id="navbar-edit"><a href="#">Manage Profile</a> | <a href="#">Sign Out</a></div>
+            <div id="navbar-username">{ username }</div>
+            <div id="navbar-edit"><a href="/herenow/profile">Manage Profile</a> | <a href="/herenow/logout">Sign Out</a></div>
           </div>
 
         </div>
