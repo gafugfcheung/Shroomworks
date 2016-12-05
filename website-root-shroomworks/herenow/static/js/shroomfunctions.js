@@ -1,9 +1,7 @@
 function addShroom(id, lat, lng, radiusInKm) {
   var centerPoint = new google.maps.LatLng(lat, lng);
 
-  var pointA = centerPoint.destinationPoint(225, radiusInKm);
-  var pointB = centerPoint.destinationPoint(45, radiusInKm);
-  var bounds = new google.maps.LatLngBounds(pointA, pointB);
+  var bounds = calculateBounds(centerPoint);
 
   var srcImage = '/static/images/lsdlarge.jpg';
 
@@ -57,6 +55,7 @@ function shroomHTML(src, location, title, time, likes) {
   addToNewsFeed(content);
 
 }
+<<<<<<< HEAD
 
 $(document).ready(function() {
   console.log('Document ready');
@@ -157,3 +156,5 @@ $(document).ready(function() {
 //   addToNewsFeed(content);
 //
 // }
+=======
+>>>>>>> f45596e4dd325699c3c4077107aa5c288f897d89
