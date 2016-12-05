@@ -1,4 +1,4 @@
-function addShroom(id, lat, lng, radiusInKm) {
+function addShroom(id, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
 
   var bounds = calculateBounds(centerPoint);
@@ -55,7 +55,6 @@ function shroomHTML(src, location, title, time, likes) {
   addToNewsFeed(content);
 
 }
-<<<<<<< HEAD
 
 $(document).ready(function() {
   console.log('Document ready');
@@ -71,14 +70,14 @@ $(document).ready(function() {
   });
 
   console.log('Getting posts list');
-  $.ajax({
-    url: '/api/posts',
-    type: "GET",
-    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
-    success : function(data) {
-      for(var d in data) {
-        console.log(data[d].image);
-      }
+    $.ajax({
+      url: '/api/posts',
+      type: "GET",
+      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success : function(data) {
+        for(var d in data.results) {
+          shroomHTML(data.results[d].image, "no", data.results[d].caption, data.results[d].id, 0);
+       }
      }
   });
 
@@ -156,5 +155,3 @@ $(document).ready(function() {
 //   addToNewsFeed(content);
 //
 // }
-=======
->>>>>>> f45596e4dd325699c3c4077107aa5c288f897d89
