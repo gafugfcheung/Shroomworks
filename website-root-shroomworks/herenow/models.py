@@ -11,7 +11,7 @@ class Profile(models.Model):
     created_datetime = models.DateTimeField('date published', default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="profile", height_field=None, width_field=None)
+    image = models.ImageField(upload_to="profile", height_field=None, width_field=None, default='profile/default.jpeg')
 
 
 class Location(models.Model):

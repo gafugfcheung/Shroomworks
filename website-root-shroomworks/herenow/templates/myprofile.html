@@ -4,8 +4,10 @@
 <h2> {{ welcome }} </h2>
 
 <!-- basic information display -->
-<div id="user-profile">
+<div id="show-user-profile" style="display:block">
   <h2>Your profile</h2>
+  <button onclick="show_edit()">Edit</button>
+  <br>
   Username: %profile.user.username%
   <br>
   Full name: %profile.user.first_name% %profile.user.last_name%
@@ -15,30 +17,89 @@
   Status: %profile.status%
   <br>
   <image src=%profile.image%></image>
+  <br>
 </div>
+
+<!-- edits basic informtion -->
+<div id="edit-user-profile" style="display:none">
+<h2>Edit your profile</h2>
+<button onclick="show_profile()">Cancel</button>
+<br>
+Username: %profile.user.username%
+<br>
+First name:
+<input type="text" id="edit-firstname" value="">
+<br>
+Last name:
+<input type="text" id="edit-lastname" value="">
+<br>
+Email:
+<input type="text" id="edit-email" value="">
+<br>
+Status:
+<input type="text" id="edit-status" value="">
+<br>
+<image src=%profile.image%></image>
+<br>
+<input type="file" id="edit-image" accept="image/*">
+</div>
+
+
 {% endblock %}
 
 {% block javascript %}
 <script>
-  $(document).ready(function() {
-    console.log("Ready!");
 
+  var user_data = 0;
+
+  $(document).ready(function() {
+    console.log("Getting user data...");
+    get_user_data();
+  });
+
+  function get_user_data() {
     $.ajax({
       url: '/api/get_profile_self',
       type: "GET",
       data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
       success : function(data) {
-          var content = document.getElementById("user-profile").innerHTML;
-          content = content.replace("%profile.user.username%", data.username);
-          content = content.replace("%profile.user.first_name%", data.first_name);
-          content = content.replace("%profile.user.last_name%", data.last_name);
-          content = content.replace("%profile.user.email%", data.email);
-          content = content.replace("%profile.status%", data.status);
-          content = content.replace("%profile.image%", data.image);
-          document.getElementById("user-profile").innerHTML = content;
+          user_data = data;
+          fill_user_info();
+          fill_edit_info();
        }
     });
+  }
 
-  });
+  function fill_user_info() {
+    var content = document.getElementById("show-user-profile").innerHTML;
+    content = content.replace("%profile.user.username%", user_data.username);
+    content = content.replace("%profile.user.first_name%", user_data.first_name);
+    content = content.replace("%profile.user.last_name%", user_data.last_name);
+    content = content.replace("%profile.user.email%", user_data.email);
+    content = content.replace("%profile.status%", user_data.status);
+    content = content.replace("%profile.image%", user_data.image);
+    document.getElementById("show-user-profile").innerHTML = content;
+  }
+
+  function fill_edit_info() {
+    var content = document.getElementById("edit-user-profile").innerHTML;
+    content = content.replace("%profile.user.username%", user_data.username);
+    content = content.replace("%profile.image%", user_data.image);
+    document.getElementById("edit-user-profile").innerHTML = content;
+    document.getElementById("edit-firstname").value = user_data.first_name;
+    document.getElementById("edit-lastname").value = user_data.last_name;
+    document.getElementById("edit-email").value = user_data.email;
+    document.getElementById("edit-status").value = user_data.status;
+  }
+
+  function show_edit() {
+      document.getElementById("show-user-profile").style.display = "none";
+      document.getElementById("edit-user-profile").style.display = "block";
+  }
+  function show_profile() {
+      document.getElementById("show-user-profile").style.display = "block";
+      document.getElementById("edit-user-profile").style.display = "none";
+  }
+
 </script>
 {% endblock %}
