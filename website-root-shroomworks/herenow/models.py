@@ -18,10 +18,13 @@ class Location(models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lon = models.DecimalField(max_digits=8, decimal_places=5)
 
+    def to_representation(self, value):
+        return 'x: %f, y: %f' % (value.x, value.y)
+
 
 class Post(models.Model):
     datetime = models.DateTimeField(blank=True, default=timezone.now)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='location')
     caption = models.CharField(max_length=100)
     image = models.ImageField(upload_to="posts", height_field=None, width_field=None)

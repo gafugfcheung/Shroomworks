@@ -5,6 +5,7 @@ from django.template import loader
 from django.http import JsonResponse
 
 # django
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -20,10 +21,11 @@ from .forms import LoginForm, SignupForm, TestForm
 
 
 # INDEX SCREEN
-def index(request):
+def index(request, template='index.html'):
     current_user = request.user
     if current_user.is_authenticated:
-        return render(request, 'index.html')
+        context = {'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY}
+        return render_to_response(template, context)
     else:
         return redirect('login_screen/')
 

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-from herenow.models import Profile, Post
+from herenow.models import Profile, Post, Location
 from rest_framework import serializers
-
+from django.db import models
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -9,9 +9,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'username', 'email')
 
 
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ('lat', 'lon')
+
+
 class PostSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     caption = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    location = LocationSerializer(many=False, read_only=True)
     image = serializers.ImageField()
 
     def create(self, validated_data):
@@ -27,6 +34,7 @@ class PostSerializer(serializers.Serializer):
         instance.caption = validated_data.get('caption', instance.caption)
         instance.save()
         return instance
+
 
 
 # class PostSerializer(serializers.HyperlinkedModelSerializer):

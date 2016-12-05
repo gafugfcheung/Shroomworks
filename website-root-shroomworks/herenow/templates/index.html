@@ -8,12 +8,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
     <script src="{% static 'js/mapfunctions.js' %}"></script>
     <script src="{% static 'js/shroomfunctions.js' %}"></script>
   </head>
   <body>
-
 
     <nav class="navbar navbar-inverse nomargin navbar-fixed-top navbar-custom">
       <div id="navbar-left">
@@ -50,41 +49,8 @@
       </div>
 
       <div id="newsfeed">
-        <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="{% static 'images/silverback.jpg' %}">
-          <div class="newsfeed-item-topbar">
-            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
-            <div class="newsfeed-item-title">Title</div>
-            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
-          </div>
-          <div class="newsfeed-item-bottombar">
-            <div class="newsfeed-item-likes">Likes</div>
-          </div>
-        </div>
 
-        <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="{% static 'images/monkey.jpg' %}">
-          <div class="newsfeed-item-topbar">
-            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
-            <div class="newsfeed-item-title">Title</div>
-            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
-          </div>
-          <div class="newsfeed-item-bottombar">
-            <div class="newsfeed-item-likes">Likes</div>
-          </div>
-        </div>
-
-        <div class="newsfeed-item">
-          <img class="newsfeed-photo" src="{% static 'images/small.jpg' %}">
-          <div class="newsfeed-item-topbar">
-            <div class="newsfeed-item-location newsfeed-item-minor">Location</div>
-            <div class="newsfeed-item-title">Title</div>
-            <div class="newsfeed-item-time newsfeed-item-minor">Time</div>
-          </div>
-          <div class="newsfeed-item-bottombar">
-            <div class="newsfeed-item-likes">Likes</div>
-          </div>
-        </div>
+        <!-- news feed items go here -->
 
       </div>
 

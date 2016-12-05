@@ -1,9 +1,9 @@
-function addShroom(id, lat, lng) {
+function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
 
   var bounds = calculateBounds(centerPoint);
 
-  var srcImage = '/static/images/lsdlarge.jpg';
+  var srcImage = src;
 
   var newShroom = new shroomOverlay(bounds, srcImage, map);
 
@@ -77,6 +77,7 @@ $(document).ready(function() {
       success : function(data) {
         for(var d in data.results) {
           shroomHTML(data.results[d].image, "no", data.results[d].caption, data.results[d].id, 0);
+          addShroom(data.results[d].id, data.results[d].image, data.results[d].location.lat, data.results[d].location.lon);
        }
      }
   });
