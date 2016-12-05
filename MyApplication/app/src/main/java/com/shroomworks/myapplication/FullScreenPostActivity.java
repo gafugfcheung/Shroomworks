@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class FullScreenPostActivity extends AppCompatActivity {
 
@@ -12,6 +13,10 @@ public class FullScreenPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_post);
         setTitle("Full screen post");
+        TextView t = (TextView)findViewById(R.id.titleLabel);
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+        t.setText(title);
     }
 
     public void openNewsFeed(View view) {
