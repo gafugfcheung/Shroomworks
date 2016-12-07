@@ -5,43 +5,33 @@
 
 <!-- basic information display -->
 <div id="show-user-profile" style="display:block">
-  <h2>Your profile</h2>
-  <button onclick="show_edit()">Edit</button>
-  <br>
-  Username: %profile.user.username%
-  <br>
-  Full name: %profile.user.first_name% %profile.user.last_name%
-  <br>
-  Email: %profile.user.email%
-  <br>
-  Status: %profile.status%
-  <br>
-  <image src=%profile.image%></image>
-  <br>
 </div>
 
 <!-- edits basic informtion -->
 <div id="edit-user-profile" style="display:none">
-<h2>Edit your profile</h2>
-<button onclick="show_profile()">Cancel</button>
-<br>
-Username: %profile.user.username%
-<br>
-First name:
-<input type="text" id="edit-firstname" value="">
-<br>
-Last name:
-<input type="text" id="edit-lastname" value="">
-<br>
-Email:
-<input type="text" id="edit-email" value="">
-<br>
-Status:
-<input type="text" id="edit-status" value="">
-<br>
-<image src=%profile.image%></image>
-<br>
-<input type="file" id="edit-image" accept="image/*">
+  <form id="edit-user-profile-form">
+    <h2>Edit your profile</h2>
+    <button onclick="show_profile()">Cancel</button>
+    <br>
+    Username: %profile.user.username%
+    <br>
+    First name:
+    <input type="text" id="edit-firstname" name="firstname" value="">
+    <br>
+    Last name:
+    <input type="text" id="edit-lastname" name="lastname" value="">
+    <br>
+    Email:
+    <input type="text" id="edit-email" name="email" value="">
+    <br>
+    Status:
+    <input type="text" id="edit-status" name="status" value="">
+    <br>
+    <image src=%profile.image%></image>
+    <br>
+    <input type="file" id="edit-image" name="image" accept="image/*">
+  </form>
+  <button onclick="send_user_data()">Update</button>
 </div>
 
 
@@ -49,8 +39,7 @@ Status:
 
 {% block javascript %}
 <script>
-
-  var user_data = 0;
+  user_data = 0;
 
   $(document).ready(function() {
     console.log("Getting user data...");
@@ -58,10 +47,13 @@ Status:
   });
 
   function get_user_data() {
+    var csrftoken = getCookie('csrftoken');
     $.ajax({
       url: '/api/get_profile_self',
       type: "GET",
-      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      beforeSend: function(jqXHR, settings) {
+        jqXHR.setRequestHeader("x-csrftoken", csrftoken);
+      },
       success : function(data) {
           user_data = data;
           fill_user_info();
@@ -70,14 +62,32 @@ Status:
     });
   }
 
+  function send_user_data() {
+    var formData = JSON.stringify($("#edit-user-profile-form").serializeObject());
+    var csrftoken = getCookie('csrftoken');
+    $.ajax({
+      url: '/api/set_profile_self',
+      type: "POST",
+      contentType: 'application/json; charset=utf-8',
+      data: formData,
+      beforeSend: function(jqXHR, settings) {
+        jqXHR.setRequestHeader("x-csrftoken", csrftoken);
+      },
+      success : function() {
+        get_user_data();
+        show_profile();
+      }
+    });
+  }
+
   function fill_user_info() {
-    var content = document.getElementById("show-user-profile").innerHTML;
-    content = content.replace("%profile.user.username%", user_data.username);
-    content = content.replace("%profile.user.first_name%", user_data.first_name);
-    content = content.replace("%profile.user.last_name%", user_data.last_name);
-    content = content.replace("%profile.user.email%", user_data.email);
-    content = content.replace("%profile.status%", user_data.status);
-    content = content.replace("%profile.image%", user_data.image);
+    var content = '';
+    content += '<h2>Your profile</h2><button onclick="show_edit()">Edit</button><br>';
+    content += 'Username: ' + user_data.username + '<br>';
+    content += 'Full name: ' + user_data.first_name + ' ' + user_data.last_name + '<br>';
+    content += 'Email: ' + user_data.email + '<br>';
+    content += 'Status: ' + user_data.status + '<br>';
+    content += '<image src=' + user_data.image + '></image><br>'
     document.getElementById("show-user-profile").innerHTML = content;
   }
 

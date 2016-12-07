@@ -44,8 +44,11 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
+    'DEFAULT_PARSER_CLASSES': ('rest_framework.parsers.JSONParser',),
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

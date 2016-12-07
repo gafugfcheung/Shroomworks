@@ -1,9 +1,12 @@
 {% load static %}<!doctype html>
 
-<html>
 
+<html>
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="{% static 'js/test.js' %}"></script>
+  <script src="{% static 'js/miscAjax.js' %}"></script>
 </head>
 
   <body>
@@ -31,16 +34,14 @@
 
     <a href="/herenow/logout">Logout</a>
 
-    <!-- defines scripts -->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="{% static 'js/test.js' %}"></script>
-
     {% block javascript %}{% endblock %}
   </body>
 
 </html>
 
 <script>
+
+window.csrftoken="{{csrftoken}}"
 
 $("#myprofile:button").click(function () {
   $.ajax({
