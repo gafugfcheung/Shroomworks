@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
 
-from . import views
+from . import views_get
+from . import views_set
+from . import views_rest
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -8,21 +10,18 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'posts', views.PostViewSet)
+router.register(r'users', views_rest.UserViewSet)
+router.register(r'posts', views_rest.PostViewSet)
 
 
 app_name = 'herenow'
 urlpatterns = [
 
     # ajax
-    url(r'^validate_username/$', views.validate_username, name='validate_username'),
-    url(r'^get_ajax/$', views.get_ajax, name='get_ajax'),
-    url(r'^get_profile_self/$', views.get_profile_self, name='get_profile_self'),
-    url(r'^get_profile/(?P<pk>[0-9]+)/$', views.get_profile, name='get_profile'),
-    url(r'^get_post/(?P<pk>[0-9]+)/$', views.get_post, name='get_post'),
-    url(r'^get_post_all/$', views.get_post_all, name='get_post_all'),
+    url(r'^get_profile_self/$', views_get.get_profile_self, name='get_profile_self'),
+    url(r'^set_profile_self$', views_set.set_profile_self, name='set_profile_self'),
 
+    # rest framework
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
