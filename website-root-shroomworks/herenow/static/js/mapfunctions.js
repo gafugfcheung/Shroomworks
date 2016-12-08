@@ -46,6 +46,8 @@ function shroomOverlay(bounds, image, map) {
 
   this.div_ = null;
 
+  this.id_ = null;
+
   this.setMap(map);
 
 }
@@ -53,7 +55,6 @@ function shroomOverlay(bounds, image, map) {
 shroomOverlay.prototype.onAdd = function() {
 
   var div = document.createElement('div');
-  div.id = shroomID;
   div.style.borderStyle = 'none';
   div.style.borderWidth = '0px';
   div.style.position = 'absolute';
@@ -78,7 +79,7 @@ shroomOverlay.prototype.onAdd = function() {
   panes.overlayMouseTarget.appendChild(div);
 
   google.maps.event.addDomListener(img, 'click', function() {
-    console.log("id: " + div.id);
+    console.log("id: " + this.id_);
     console.log("src: " + this.image_);
     //shroomClicked(this.div_.id);
   });

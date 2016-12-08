@@ -32,6 +32,7 @@ public class NewsFeedActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
         newsFeedContentView.setAdapter(adapter);
 
+
     }
 
     public void openNewsFeed(View view) {
@@ -58,5 +59,7 @@ public class NewsFeedActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullScreenPostActivity.class);
         startActivity(intent);
     }
+
+
 
 }

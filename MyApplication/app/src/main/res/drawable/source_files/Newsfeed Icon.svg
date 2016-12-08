@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="40px" viewBox="0 0 30 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->
+    <title>Newsfeed Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="30" height="40" rx="4"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="30" height="40" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Wireframes2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AnotherFullviewPic" transform="translate(-172.000000, -1148.000000)">
+            <g id="Navbar" transform="translate(0.000000, 1136.000000)">
+                <g id="Icons" transform="translate(18.000000, 12.000000)">
+                    <g id="Newsfeed-Icon" transform="translate(154.000000, 0.000000)">
+                        <use id="Rectangle-25" stroke="#3C6FB6" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+                        <g id="LinesNewsfeed" transform="translate(3.000000, 9.000000)" fill="#3C6FB6">
+                            <rect id="Rectangle-26" x="0" y="0" width="23" height="2" rx="1"></rect>
+                            <rect id="Rectangle-26-Copy" x="0" y="5" width="23" height="2" rx="1"></rect>
+                            <rect id="Rectangle-26-Copy-2" x="0" y="10" width="23" height="2" rx="1"></rect>
+                            <rect id="Rectangle-26-Copy-3" x="0" y="15" width="23" height="2" rx="1"></rect>
+                            <rect id="Rectangle-26-Copy-4" x="0" y="20" width="23" height="2" rx="1"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

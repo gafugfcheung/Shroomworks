@@ -9,6 +9,7 @@ function addShroom(id, src, lat, lng) {
 
   shroomID = id;
   shrooms[id] = newShroom;
+  shrooms[id].id_ = id;
   console.log("Shroom " + id + " created");
 
   var me = this;
