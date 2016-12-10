@@ -13,7 +13,6 @@ router = routers.DefaultRouter()
 router.register(r'users', views_rest.UserViewSet)
 router.register(r'posts', views_rest.PostViewSet)
 
-
 app_name = 'herenow'
 urlpatterns = [
 
