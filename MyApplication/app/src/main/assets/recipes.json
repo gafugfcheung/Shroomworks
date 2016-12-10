@@ -100,5 +100,25 @@
       "dietLabel": "Low-Sodium",
       "ingredientLines" : [ "1 1/4 teaspoons unflavored gelatin (from a 1/4-ounce envelope)", "3/4 cup sugar", "1 cup low-fat buttermilk", "1 1/2 cups heavy cream", "1 pound strawberries, hulled and quartered", "1 teaspoon fresh lemon juice" ]
     }
+
+    {
+      "title": "Buttermilk Creams with Strawberries",
+      "image" : "https://www.edamam.com/web-img/af6/af6e66d2d8b8de01a99d7587429223ae.jpg",
+      "url": "http://www.marthastewart.com/314096/buttermilk-creams-with-strawberries",
+      "description": "Whipped cream gives these no-bake eggless custards a delicate texture. Don't worry if the mixture forms clumps at first -- it will come together with gentle folding.",
+      "servings": 8,
+      "dietLabel": "Low-Sodium",
+      "ingredientLines" : [ "1 1/4 teaspoons unflavored gelatin (from a 1/4-ounce envelope)", "3/4 cup sugar", "1 cup low-fat buttermilk", "1 1/2 cups heavy cream", "1 pound strawberries, hulled and quartered", "1 teaspoon fresh lemon juice" ]
+    }
+
+    {
+      "title": "Buttermilk Creams with Strawberries",
+      "image" : "https://www.edamam.com/web-img/af6/af6e66d2d8b8de01a99d7587429223ae.jpg",
+      "url": "http://www.marthastewart.com/314096/buttermilk-creams-with-strawberries",
+      "description": "Whipped cream gives these no-bake eggless custards a delicate texture. Don't worry if the mixture forms clumps at first -- it will come together with gentle folding.",
+      "servings": 8,
+      "dietLabel": "Low-Sodium",
+      "ingredientLines" : [ "1 1/4 teaspoons unflavored gelatin (from a 1/4-ounce envelope)", "3/4 cup sugar", "1 cup low-fat buttermilk", "1 1/2 cups heavy cream", "1 pound strawberries, hulled and quartered", "1 teaspoon fresh lemon juice" ]
+    }
   ]
 }

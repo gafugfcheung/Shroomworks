@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +17,13 @@ public class MainActivity extends AppCompatActivity {
     }
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
+
+        EditText emailText = (EditText)findViewById(R.id.login_email);
+        String emailValue = emailText.getText().toString();
+        EditText passwordText = (EditText)findViewById(R.id.login_password);
+        String passwordValue = passwordText.getText().toString();
+
+        android.util.Log.v(TAG, "email=" + emailValue + " password=" + passwordValue);
         Intent intent = new Intent(this, NewsFeedActivity.class);
         startActivity(intent);
     }
