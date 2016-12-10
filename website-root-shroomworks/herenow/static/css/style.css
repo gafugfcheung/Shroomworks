@@ -175,8 +175,6 @@ a {
   position: absolute;
   width: 50%;
   left: 25%;
-
-
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -192,6 +190,31 @@ input {
 
 #navbar-download {
   float: right;
+  height: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#navbar-download-text {
+  float: left;
+  margin-right: 10px;
+}
+
+#navbar-download-1 {
+  height: 20px;
+  font-size: 20px;
+}
+
+#navbar-download-2 {
+  height: 20px;
+  font-size: 17px;
+}
+
+.navbar-app-icon {
+  line-height: 1;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #navbar-right {

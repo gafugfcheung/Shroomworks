@@ -67,7 +67,7 @@ function stopCamera() {
 
 // Trigger photo take
 function snap() {
-  document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
+  document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 1280, 720);
   document.getElementById('take_pic').style.display = 'none';
   document.getElementById('show_pic').style.display = 'block';
   document.getElementById('image_b64').value = document.getElementById('canvas').toDataURL("image/png");
