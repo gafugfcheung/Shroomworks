@@ -1,16 +1,17 @@
+const METABOXWIDTH = 360;
+
 function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
   shroomCenters[id] = centerPoint;
   var bounds = calculateBounds(centerPoint);
 
-  var srcImage = src;
 
-  var newShroom = new shroomOverlay(bounds, srcImage, map);
+  var newShroom = new shroomOverlay(bounds, src, map);
 
-  shroomID = id;
   shrooms[id] = newShroom;
   shrooms[id].id_ = id;
-  console.log("Shroom " + id + " created");
+
+  srcToID[src] = id;
 
   var me = this;
   map.setCenter(centerPoint);
@@ -33,8 +34,52 @@ function shroomClicked(id) {
 }
 
 function displayFullScreen(id, src) {
+
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("fullscreen-photo").src = src;
+
+  var img = document.getElementById("fullscreen-photo");
+  img.src = src;
+
+  var map_img = document.getElementById("fullscreen-meta-map");
+
+  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x240&markers=" + shroomCenters[id].lat() + "," + shroomCenters[id].lng() + "AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw"; //TODO fix api key with django
+
+  updateFullScreenSize();
+
+}
+
+function updateFullScreenSize() {
+  var img = document.getElementById("fullscreen-photo");
+  var wrapper = document.getElementById("fullscreen-photo-wrapper");
+  var metabox = document.getElementById("fullscreen-meta");
+
+  var imgWidth = img.naturalWidth;
+  var imgHeight = img.naturalHeight;
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  if (imgWidth > 0.9 * windowWidth - METABOXWIDTH) {
+    var newWidth = 0.9 * windowWidth - METABOXWIDTH;
+    imgHeight = imgHeight * newWidth / imgWidth;
+    imgWidth = newWidth;
+  }
+
+  if (imgHeight > 0.9 * windowHeight) {
+    imgWidth = imgWidth * 0.9 * windowHeight / imgHeight;
+    imgHeight = 0.9 * windowHeight;
+  }
+
+  var wrapperWidth = imgWidth + METABOXWIDTH;
+
+  var left = (windowWidth - wrapperWidth) / 2;
+  var top = (windowHeight - imgHeight) / 2;
+  wrapper.style.left = left + "px";
+  wrapper.style.width = wrapperWidth + "px";
+  img.style.width = imgWidth + "px";
+  wrapper.style.top = top + "px";
+  wrapper.style.height = imgHeight + "px";
+  img.style.height = imgHeight + "px";
+  metabox.style.height = imgHeight + "px";
 }
 
 function hideFullScreen() {

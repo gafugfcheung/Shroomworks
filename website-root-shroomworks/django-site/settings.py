@@ -138,4 +138,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = './login'
 
 # other
-GOOGLE_MAPS_API_KEY = 'AIzaSyCPM9_3BAacJDRTNoa0qchoRCuqMdgCjN0'
+GOOGLE_MAPS_API_KEY = 'AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw'
