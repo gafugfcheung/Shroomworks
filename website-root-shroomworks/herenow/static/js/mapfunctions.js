@@ -22,12 +22,10 @@ function calculateBounds(point) {
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 11,
+    zoom: 8,
     minZoom: 2,
-    center: {lat: 51, lng: 0},
+    center: {lat: 51.5, lng: 0},
   });
-
-  var mapLoaded = false;
 
   google.maps.event.addListenerOnce(map, 'idle', function(){
     for(var d in dataResults) {
@@ -44,6 +42,8 @@ function initMap() {
       shrooms[i].bounds_ = calculateBounds(shroomCenters[i]);
     }
   });
+
+
 }
 
 /** @constructor */

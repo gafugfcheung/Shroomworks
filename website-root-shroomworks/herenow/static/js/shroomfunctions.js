@@ -5,14 +5,9 @@ function addShroom(id, src, lat, lng) {
   shroomCenters[id] = centerPoint;
   var bounds = calculateBounds(centerPoint);
 
-
   var newShroom = new shroomOverlay(bounds, src, map);
 
   shrooms[id] = newShroom;
-  shrooms[id].id_ = id;
-
-  var me = this;
-  map.setCenter(centerPoint);
 }
 
 function addTestShroom(lat, lng) {
