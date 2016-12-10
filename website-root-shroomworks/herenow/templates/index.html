@@ -19,7 +19,14 @@
 
     <nav class="navbar navbar-inverse nomargin navbar-fixed-top navbar-custom">
       <div id="navbar-left">
-        <div id="navbar-logo">(o) LENS</div>
+        <a href="{{ BASE_URL }}">
+          <div id="navbar-logo">
+            <img id="navbar-logo-pic" src="{% static 'images/lenslogo.png' %}">
+            <div id="navbar-logo-text">
+              LENS
+            </div>
+          </div>
+        </a>
         <div id="navbar-search">
           <input type="text" placeholder="Search the world">
         </div>
@@ -63,7 +70,18 @@
 
     <div id="fullscreen">
       <div id="fullscreen-bg" onClick="hideFullScreen()"></div>
-      <img id="fullscreen-photo" src="{% static 'images/lsdlarge.jpg' %}" onClick="null">
+      <div id="fullscreen-photo-wrapper">
+        <img id="fullscreen-photo" src="{% static 'images/lsdlarge.jpg' %}" onClick="null">
+        <div id="fullscreen-meta">
+
+          <div id="fullscreen-meta-title">
+            Cockfosters
+          </div>
+
+          <img id="fullscreen-meta-map">
+
+        </div>
+      </div>
     </div>
 
     </body>

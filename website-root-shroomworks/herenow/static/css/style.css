@@ -151,15 +151,32 @@ a {
 
 #navbar-logo {
   float: left;
+  height: 100%;
+}
+
+#navbar-logo-pic {
+  float: left;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 0px;
+  width: 70px;
+}
+
+#navbar-logo-text {
+  float: left;
   font-size: 40px;
   padding: 15px;
-  height: 100%;
+  padding-left: 10px;
   line-height: 1 !important;
+  color: black !important;
 }
 
 #navbar-search {
   position: absolute;
-  width: 100%;
+  width: 50%;
+  left: 25%;
+
+
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -243,13 +260,19 @@ input {
   background: rgba(0,0,0,0.6);
 }
 
+#fullscreen-photo-wrapper {
+    position: fixed;
+}
+
 #fullscreen-photo {
-  position: fixed;
-  max-width: 90%;
-  max-height: 90%;
-  margin-top: 15%;
-  margin-left: 5%;
-  margin-right: 5%;
+  float: left;
+}
+
+#fullscreen-meta {
+  float: right;
+  width: 360px;
+  padding: 15px;
+  background: #ccc;
 }
 
 .minimap_preview {
