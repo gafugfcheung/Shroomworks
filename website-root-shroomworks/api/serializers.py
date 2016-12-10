@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from herenow.models import Profile, Post, Location
+from herenow.models import Profile, Post, Location, Comment
 from rest_framework import serializers
 from django.db import models
 
@@ -13,6 +13,12 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = ('description', 'lat', 'lon')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('caption', 'datetime', 'profile')
 
 
 class PostSerializer(serializers.Serializer):
@@ -35,16 +41,3 @@ class PostSerializer(serializers.Serializer):
         instance.caption = validated_data.get('caption', instance.caption)
         instance.save()
         return instance
-
-
-
-# class PostSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Post
-#         fields = ('id', 'caption', 'image')
-#
-#     def create(self, validated_data):
-#         """
-#         Create and return a new `Post` instance, given the validated data.
-#         """
-#         return Post.objects.create(**validated_data)
