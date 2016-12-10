@@ -8,6 +8,7 @@ from django.conf import settings
 
 
 class Profile(models.Model):
+    active = models.BooleanField(default=True)
     created_datetime = models.DateTimeField('date published', default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
@@ -21,9 +22,10 @@ class Location(models.Model):
 
 
 class Post(models.Model):
+    active = models.BooleanField(default=True)
     datetime = models.DateTimeField(blank=True, default=timezone.now)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='location')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='post_location')
     caption = models.CharField(max_length=100)
     image = models.ImageField(upload_to="posts", height_field=None, width_field=None)
 
@@ -42,3 +44,18 @@ class Post(models.Model):
             return str(minutes) + ' minutes ago'
         else:
             return 'Just now'
+
+
+class Comment(models.Model):
+    active = models.BooleanField(default=True)
+    datetime = models.DateTimeField(blank=True, default=timezone.now)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='comment_location')
+    caption = models.CharField(max_length=100)
+
+
+class Like(models.Model):
+    datetime = models.DateTimeField(blank=True, default=timezone.now)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

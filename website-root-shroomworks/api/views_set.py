@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from herenow.models import Profile, Location, Post
+from herenow.models import Profile, Location, Post, Comment, Like
 from django.http import JsonResponse, HttpResponse
 import json
 
@@ -50,4 +50,24 @@ def create_post(request):
         else:
             return JsonResponse({'status': 'error', 'message': 'invalid_request'})
     else:
-        return HttpResponse('Invalid user', {})
+        return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
+
+
+def create_comment(request):
+    user = request.user
+    if user.is_authenticated:
+        profile = user.profile_set.all()[0]
+        if request.is_ajax() and request.method == 'POST':
+            response = json.loads(request.body.decode("utf-8"))
+            post = Post.objects.get(id=response['post_id'])
+            location = Location.objects.create(lat=response['lat'], lon=response['lon'])
+            comment = Comment.objects.create(location=location,
+                                             profile=profile,
+                                             post=post,
+                                             caption=response['caption'])
+            comment.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'invalid_request'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
