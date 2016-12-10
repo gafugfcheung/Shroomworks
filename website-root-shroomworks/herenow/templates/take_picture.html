@@ -1,0 +1,37 @@
+{% load static %}
+<html>
+<script src="{% static 'js/webPicture.js' %}"></script>
+<div id="picture_modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <img id="minimap" src='' class="minimap_preview">
+
+    <div id="take_pic" style="display:block">
+      <video id="video" width="400" height="300" autoplay></video>
+      <br>
+      <button id="snap" onclick="snap()">Snap Photo</button>
+    </div>
+
+    <div id="show_pic" style="display:none">
+      <canvas id="canvas" width="400" height="300"></canvas>
+      <br>
+      <button id="retake_pic" onclick="retakePicture()">Retake</button>
+      <button id="create_post_button" onclick="createPost()">Send</button>
+    </div>
+
+    <form id="create_post_form">
+      <input type="text" id="lat" name="lat" value="" hidden>
+      <input type="text" id="lon" name="lon" value="" hidden>
+      <input type="text" id="image_b64" name="image" value="" hidden>
+      <br>
+      Caption:
+      <input type="text" id="caption" name="caption" value="">
+    </form>
+  </div>
+</div>
+</html>
+<script>
+</script>

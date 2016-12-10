@@ -1,4 +1,5 @@
 {% load static %}
+{% include "take_picture.html" %}
 
 <!doctype html>
 <html>
@@ -11,6 +12,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
     <script src="{% static 'js/mapfunctions.js' %}"></script>
     <script src="{% static 'js/shroomfunctions.js' %}"></script>
+    <script src="{% static 'js/webPicture.js' %}"></script>
+    <script src="{% static 'js/miscAjax.js' %}"></script>
   </head>
   <body>
 
@@ -34,7 +37,7 @@
           <img id="navbar-profile-pic" src="">
           <div id="navbar-info">
             <div id="navbar-username">{ username }</div>
-            <div id="navbar-edit"><a href="/herenow/profile">Manage Profile</a> | <a href="/herenow/logout">Sign Out</a></div>
+            <div id="navbar-edit"><a href="/herenow/profile">Manage Profile</a> | <a href="/herenow/logout">Sign Out</a> | <a onclick="take_pic()" href="#">Create Post</a></div>
           </div>
 
         </div>
