@@ -84,10 +84,10 @@ $(document).ready(function() {
       data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
       success : function(data) {
         for(var d in data.results) {
+          dataResults[d] = data.results[d];
           shroomHTML(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
-          addShroom(data.results[d].id, data.results[d].image, data.results[d].location.lat, data.results[d].location.lon);
-       }
-     }
-  });
+        }
+      }
+    });
 
 })

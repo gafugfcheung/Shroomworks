@@ -1,7 +1,7 @@
 var shrooms = {};
 var shroomCenters = {};
 var map;
-var shroomID;
+var dataResults = {};
 const DEFAULT_OPACITY = 0.8;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
 const MIN_ZOOM = 1;
@@ -24,6 +24,14 @@ function initMap() {
     zoom: 11,
     minZoom: 2,
     center: {lat: 51, lng: 0},
+  });
+
+  var mapLoaded = false;
+
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    for(var d in dataResults) {
+      addShroom(dataResults[d].id, dataResults[d].image, dataResults[d].location.lat, dataResults[d].location.lon);
+    }
   });
 
   map.addListener('zoom_changed', function() {
