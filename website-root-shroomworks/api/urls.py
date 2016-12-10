@@ -19,6 +19,7 @@ urlpatterns = [
     # ajax
     url(r'^get_profile_self/$', views_get.get_profile_self, name='get_profile_self'),
     url(r'^set_profile_self$', views_set.set_profile_self, name='set_profile_self'),
+    url(r'^create_post$', views_set.create_post, name='create_post'),
 
     # rest framework
     url(r'^', include(router.urls)),

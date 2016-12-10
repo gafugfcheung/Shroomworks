@@ -6,6 +6,7 @@
 
     // gps functions
     function getMiniMap(position) {
+      console.log('getting minimap');
       var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=LATITUDE,LONGITUDE&zoom=14&size=400x300&markers=color:blue|LATITUDE,LONGITUDE&key=AIzaSyCoGpZQdMzmoahBt27dvZDWNlPdeCagig8";
       var lat = position.coords.latitude;
       var lon = position.coords.longitude;
@@ -17,6 +18,7 @@
     }
 
     function getLocation() {
+      console.log('getting location');
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition, showError);
       }
@@ -25,6 +27,7 @@
       }
 
       function showPosition(position) {
+        console.log('show position');
           document.getElementById("id_lat").value = position.coords.latitude;
           document.getElementById("id_lon").value = position.coords.longitude;
           getMiniMap(position);
@@ -90,33 +93,33 @@
 {% extends "base_old.html" %}
 
 {% block content %}
-<body onload="onOpen()">
+  <body onload="onOpen()">
 
-<h2>Create your post:</h2>
-{{ err_msg }}
+  <h2>Create your post:</h2>
+  {{ err_msg }}
 
-<img id="minimap" src=''>
-<br>
-
-<p id="test"></p>
-
-
-<div id="take_pic" style="display:block">
-  <video id="video" width="400" height="300" autoplay></video>
+  <img id="minimap" src=''>
   <br>
-  <button id="snap" onclick="snap()">Snap Photo</button>
-</div>
 
-<div id="show_pic" style="display:none">
-  <canvas id="canvas" width="400" height="300"></canvas>
-  <br>
-  <button id="retake_pic" onclick="retakePicture()">Retake</button>
-</div>
+  <p id="test"></p>
 
-<form id="create_post" action="create_post" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button id="create_post_button" onclick="createPost()">Send</button>
-</form>
+
+  <div id="take_pic" style="display:block">
+    <video id="video" width="400" height="300" autoplay></video>
+    <br>
+    <button id="snap" onclick="snap()">Snap Photo</button>
+  </div>
+
+  <div id="show_pic" style="display:none">
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <br>
+    <button id="retake_pic" onclick="retakePicture()">Retake</button>
+  </div>
+
+  <form id="create_post" action="create_post" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="create_post_button" onclick="createPost()">Send</button>
+  </form>
 
 {% endblock content %}
