@@ -42,7 +42,7 @@ function displayFullScreen(id, src) {
 
   var map_img = document.getElementById("fullscreen-meta-map");
 
-  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x240&markers=" + shroomCenters[id].lat() + "," + shroomCenters[id].lng() + "AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw"; //TODO fix api key with django
+  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x240&zoom=5&markers=" + shroomCenters[id].lat() + "," + shroomCenters[id].lng() + "&key=AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw";
 
   updateFullScreenSize();
 
