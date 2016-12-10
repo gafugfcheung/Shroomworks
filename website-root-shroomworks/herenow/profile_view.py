@@ -63,7 +63,7 @@ def login(request):
     user = authenticate(username=name, password=pswd)
     if user is not None:
         auth_login(request, user)
-        return redirect('/herenow/profile?welcome=True')
+        return redirect('/herenow/')
     else:
         return login_screen(request, '* Could not log in. Please check your username and password.')
 
