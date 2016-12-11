@@ -1,30 +1,51 @@
 package com.shroomworks.myapplication;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
+import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    private static final String TAG = "MainActivity";
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-    /** Called when the user clicks the Send button */
-    public void sendMessage(View view) {
+        navigationManager();
 
-        EditText emailText = (EditText)findViewById(R.id.login_email);
-        String emailValue = emailText.getText().toString();
-        EditText passwordText = (EditText)findViewById(R.id.login_password);
-        String passwordValue = passwordText.getText().toString();
-
-        android.util.Log.v(TAG, "email=" + emailValue + " password=" + passwordValue);
-        Intent intent = new Intent(this, NewsFeedActivity.class);
-        startActivity(intent);
     }
+
+    private void navigationManager() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_map:
+                                addFragment();
+                                break;
+                            case R.id.action_newsfeed:
+                                addFragment();
+                                break;
+                            case R.id.action_profile:
+                                addFragment();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+    }
+
+    private void addFragment() {
+        getSupportFragmentManager().beginTransaction().add(R.id.contentFragment, new NewsfeedFragment()).commit();
+    }
+
 }

@@ -20,7 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void logOut(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

@@ -35,4 +35,23 @@
             android:text="@string/create_post"
             android:onClick="openCreatePost" />
     </LinearLayout>
+
+    <Button
+        android:text="Take a picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="takePicture" />
+
+    <ImageView
+        android:id="@+id/shroomThumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/shroom"/>
+
+    <Button
+        android:text="Post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="postPicture" />
 </LinearLayout>
