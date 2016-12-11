@@ -5,16 +5,9 @@ function addShroom(id, src, lat, lng) {
   shroomCenters[id] = centerPoint;
   var bounds = calculateBounds(centerPoint);
 
-
   var newShroom = new shroomOverlay(bounds, src, map);
 
   shrooms[id] = newShroom;
-  shrooms[id].id_ = id;
-
-  srcToID[src] = id;
-
-  var me = this;
-  map.setCenter(centerPoint);
 }
 
 function addTestShroom(lat, lng) {
@@ -31,6 +24,10 @@ function shroomClicked(id) {
   var src = shrooms[id].image_;
   console.log("src: " + src);
   displayFullScreen(id, src);
+}
+
+function IDtoFullScreen(id) {
+  displayFullScreen(id, shrooms[id].image_);
 }
 
 function displayFullScreen(id, src) {
@@ -93,7 +90,9 @@ function addToNewsFeed(newContent) {
 function shroomHTML(src, location, title, time, likes) {
 
   var content = "";
-  content += '<div class="newsfeed-item"><img class="newsfeed-photo" src="';
+  content += '<div class="newsfeed-item" onClick="IDtoFullScreen(';
+  content += srcToID[src];
+  content += ')"><img class="newsfeed-photo" src="';
   content += src;
   content += '"><div class="newsfeed-item-topbar"><div class="newsfeed-item-location newsfeed-item-minor">';
   content += location;
@@ -130,6 +129,7 @@ $(document).ready(function() {
       success : function(data) {
         for(var d in data.results) {
           dataResults[d] = data.results[d];
+          srcToID[data.results[d].image] = data.results[d].id;
           shroomHTML(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
         }
       }

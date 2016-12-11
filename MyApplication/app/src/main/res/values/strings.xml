@@ -12,4 +12,13 @@
     <string name="google_maps_key">AIzaSyBtVqa7wjKAzEIF6PatGv-AMjGYKTtjadg</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
+
+    <string name="return_button">Return Button</string>
+    <string name="shrooms">Shrooms</string>
+    <string name="sample_author">By John Anec</string>
+    <string name="sample_location">London, UK</string>
+    <string name="sample_title">A Motherfucking Shroom</string>
+    <string name="sample_time">1 min ago</string>
+    <string name="sample_description">Have shrooms everyday motherfuckers. </string>
+    <string name="sample_text">blahblahblah</string>
 </resources>
