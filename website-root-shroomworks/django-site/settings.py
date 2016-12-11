@@ -25,7 +25,7 @@ SECRET_KEY = 'j%-wg4^mwar2&_n#bu&b5o5emn#p-ac65f65th^z%zu&y-wy5x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aws-env.cjiqjg5vbi.us-west-2.elasticbeanstalk.com', 'localhost']
+ALLOWED_HOSTS = ['aws-env.cjiqjg5vbi.us-west-2.elasticbeanstalk.com', 'localhost', '192.168.1.81']
 
 
 # Application definition
@@ -139,3 +139,4 @@ LOGIN_URL = './login'
 
 # other
 GOOGLE_MAPS_API_KEY = 'AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw'
+DATA_UPLOAD_MAX_MEMORY_SIZE = 4 * 1024 * 1024  # 4 MB

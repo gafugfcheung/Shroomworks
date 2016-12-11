@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from herenow.models import Profile, Location, Post, Comment, Like
 from django.http import JsonResponse, HttpResponse
 import json
+import datetime
 
 # image processing
 from django.core.files.base import ContentFile
@@ -70,4 +71,28 @@ def create_comment(request):
         else:
             return JsonResponse({'status': 'error', 'message': 'invalid_request'})
     else:
+        return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
+
+
+def receive_picture(request):
+    user = request.user
+    if user.is_authenticated:
+        profile = user.profile_set.all()[0]
+        if request.is_ajax() and request.method == 'POST':
+            ImageData = json.loads(request.body.decode("utf-8"))
+            if ImageData is None or len(ImageData) == 0:
+                return HttpResponse('Error receiving picture!')
+            dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+            ImageData = dataUrlPattern.match(ImageData).group(2)
+            image_savename = user.username + datetime.datetime.now().strftime('%Y-%m-%d %H:%M') + ".jpeg"
+            image = ContentFile(base64.b64decode(ImageData), image_savename)
+            profile.image = image
+            profile.save()
+            print 'success'
+            return JsonResponse({'status': 'success'})
+        else:
+            print 'invalid request'
+            return JsonResponse({'status': 'error', 'message': 'invalid_request'})
+    else:
+        print 'user error'
         return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
