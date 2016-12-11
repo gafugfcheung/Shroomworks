@@ -298,6 +298,31 @@ input {
   background: #ccc;
 }
 
+#fullscreen-meta-title {
+  font-size: 20px;
+}
+
+#fullscreen-meta-map {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#fullscreen-meta-likes {
+  padding: 5px;
+  float: left;
+}
+
+#fullscreen-meta-comments {
+  padding: 5px;
+  float: right;
+}
+
+.picIcon {
+  height: 23px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .minimap_preview {
   float: left;
   padding-right: 10px;
