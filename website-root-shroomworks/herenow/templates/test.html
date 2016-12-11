@@ -1,50 +1,55 @@
 {% extends "base_old.html" %}
+{% load static %}
 
 {% block javascript %}
   <script>
+  image = 0;
 
-  $("#id_test_field").change(function () {
-    var username = $(this).val();
-    console.log(username);
+  function sendImage() {
+    var csrftoken = getCookie('csrftoken');
+    var formData = JSON.stringify(image);
 
     $.ajax({
-      url: '/api/validate_username/',
-      data: {
-        'username': username
+      url: '/api/receive_picture',
+      type: "POST",
+      dataType: 'application/json; charset=utf-8',
+      data: formData,
+      beforeSend: function(jqXHR, settings) {
+        jqXHR.setRequestHeader("x-csrftoken", csrftoken);
       },
-      dataType: 'json',
-      success: function (data) {
-        if (data.is_taken) {
-          alert("A user with this username already exists.");
-        }
+      success : function() {
       }
     });
+  }
 
-  });
+  function convertBase64() {
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
 
-  $("#butt:button").click(function () {
-    $.ajax({
-      url: '/api/get_ajax/',
-      type: "POST",
-      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
-      success : function(data) {
-           $('div.ajax').html(data);
-       }
-    });
-  });
+    reader.addEventListener("load", function () {
+      image = reader.result;
+    }, false);
 
+    if(file) {
+      reader.readAsDataURL(file);
+    }
+  }
   </script>
 {% endblock %}
 
 {% block content %}
-<h2>Testing AJAX</h2>
+<html>
+<script src="{% static 'js/miscAjax.js' %}"></script>
 
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit">
+<h2>Testing upload picture</h2>
 
-<button id="butt" type="button">Click Me!</button>
+  <form>
+      <br>Select image to upload:
+      <input type="file" id="fileToUpload" name="fileToUpload" onchange="convertBase64()" capture="camera"><br>
+      <br>
+  </form>
 
-<div class="ajax">No update yet</div>
+  <input type="button" value="Upload Image" onclick="sendImage()">
 
+</html>
 {% endblock content %}

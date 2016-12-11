@@ -8,20 +8,22 @@ from django.core import serializers
 # Create your views here.
 
 from rest_framework import viewsets
-from api.serializers import UserSerializer, PostSerializer
+from api.serializers import UserSerializer, PostSerializer, PostPreviewSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+    """ API endpoint that allows users to be viewed """
     queryset = User.objects.all().order_by('date_joined')
     serializer_class = UserSerializer
 
 
+class PostPreviewSet(viewsets.ModelViewSet):
+    """ API endpoint that allows posts preview to be viewed """
+    queryset = Post.objects.all().order_by('-datetime')
+    serializer_class = PostPreviewSerializer
+
+
 class PostViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows posts to be viewed or edited.
-    """
+    """ API endpoint that allows posts to be viewed """
     queryset = Post.objects.all().order_by('-datetime')
     serializer_class = PostSerializer

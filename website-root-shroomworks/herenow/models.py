@@ -24,7 +24,7 @@ class Location(models.Model):
 class Post(models.Model):
     active = models.BooleanField(default=True)
     datetime = models.DateTimeField(blank=True, default=timezone.now)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_profile')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='post_location')
     caption = models.CharField(max_length=100)
     image = models.ImageField(upload_to="posts", height_field=None, width_field=None)
@@ -49,13 +49,13 @@ class Post(models.Model):
 class Comment(models.Model):
     active = models.BooleanField(default=True)
     datetime = models.DateTimeField(blank=True, default=timezone.now)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment_post')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comment_profile')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='comment_location')
     caption = models.CharField(max_length=100)
 
 
 class Like(models.Model):
     datetime = models.DateTimeField(blank=True, default=timezone.now)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='like_post')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='like_profile')
