@@ -3,7 +3,7 @@ var shroomCenters = {};
 var map;
 var dataResults = {};
 var srcToID = {};
-const DEFAULT_OPACITY = 0.8;
+const DEFAULT_OPACITY = 1;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
 const MIN_ZOOM = 5;
 
@@ -74,7 +74,7 @@ shroomOverlay.prototype.onAdd = function() {
   img.style.height = '100%';
   img.style.position = 'absolute';
   img.style.borderRadius = '100%';
-  img.style.border = '2px solid blue';
+  img.style.border = '3px solid #315FAC';
   img.style.opacity = DEFAULT_OPACITY;
   img.style.objectFit = "cover";
   div.appendChild(img);
@@ -96,11 +96,11 @@ shroomOverlay.prototype.onAdd = function() {
   });
 
   google.maps.event.addDomListener(img, 'mouseover', function() {
-    img.style.opacity = 1;
+    img.style.border = '3px solid #1F2C5D';
   });
 
   google.maps.event.addDomListener(img, 'mouseout', function() {
-    img.style.opacity = DEFAULT_OPACITY;
+  img.style.border = '3px solid #315FAC';
   });
 
 };
