@@ -252,6 +252,12 @@ public class MainActivity extends FragmentActivity implements LocationListener {
         encodedPic = Base64.encodeToString(b, Base64.DEFAULT);
     }
 
+    public void openSingle(String title) {
+        Intent intent = new Intent(this, FullScreenPostActivity.class);
+        intent.putExtra("title", "photo" + title);
+        startActivity(intent);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();

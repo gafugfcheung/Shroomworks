@@ -24,9 +24,9 @@ function calculateBounds(point) {
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
+    zoom: 5,
     minZoom: 2,
-    center: {lat: 51.5, lng: 0},
+    center: {lat: 51.5, lng: 10},
   });
 
   google.maps.event.addListenerOnce(map, 'idle', function(){

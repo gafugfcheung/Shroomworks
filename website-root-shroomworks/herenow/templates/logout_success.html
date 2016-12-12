@@ -1,4 +1,15 @@
 {% extends "base_old.html" %}
+{% load static %}
 {% block content %}
-<p>Logout successful. Come back later!</p>
+<div class="background">
+
+  <div id="login-container">
+    <img id="login-logo" src="{% static 'images/lenslogo.png' %}">
+    <h2 class="login-enter" style="margin-bottom: 10px;">Logout successful</h2>
+    <h4 class="login-enter" style="margin-top: 0px;">Click <a href="/">here</a> to sign in again</h4>
+
+  </div>
+</div>
+
+
 {% endblock content %}

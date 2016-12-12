@@ -43,6 +43,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".FullScreenPostActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsActivity"

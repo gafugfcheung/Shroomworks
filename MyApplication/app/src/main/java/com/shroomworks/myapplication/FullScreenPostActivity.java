@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class FullScreenPostActivity extends AppCompatActivity {
@@ -11,28 +14,26 @@ public class FullScreenPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_full_screen_post);
-        setTitle("Full screen post");
 
-        TextView t = (TextView)findViewById(R.id.titleLabel);
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
-        t.setText(title);
+
+        ImageView img = (ImageView) findViewById(R.id.imageFull);
+
+        img.setImageResource(getResourceId(title, "drawable", getPackageName()));
 
     }
-    /*
-    public void openNewsFeed(View view) {
-        Intent intent = new Intent(this, NewsFeedActivity.class);
-        startActivity(intent);
-    }
 
-    public void openMap(View view) {
-        Intent intent = new Intent(this, MapViewActivity.class);
-        startActivity(intent);
+    public int getResourceId(String pVariableName, String pResourcename, String pPackageName)
+    {
+        try {
+            return getResources().getIdentifier(pVariableName, pResourcename, pPackageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
-
-    public void openUserProfile(View view) {
-        Intent intent = new Intent(this, UserProfileActivity.class);
-        startActivity(intent);
-    }*/
 }
