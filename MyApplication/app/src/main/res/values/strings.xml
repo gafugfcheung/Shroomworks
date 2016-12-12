@@ -4,6 +4,7 @@
     <string name="map">Map</string>
     <string name="newsfeed">Newsfeed</string>
     <string name="profile">Profile</string>
+    <string name="post">Create</string>
 
     <string name="edit_message">Email</string>
     <string name="news_feed">News feed view</string>
@@ -14,7 +15,7 @@
     <string name="display_post">Display post</string>
     <string name="open_settings">Settings</string>
     <string name="log_out">Log out</string>
-    <string name="google_maps_key">AIzaSyBtVqa7wjKAzEIF6PatGv-AMjGYKTtjadg</string>
+    <string name="google_maps_key">AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
 
