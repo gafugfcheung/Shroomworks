@@ -71,6 +71,7 @@ function snap() {
   document.getElementById('take_pic').style.display = 'none';
   document.getElementById('show_pic').style.display = 'block';
   document.getElementById('image_b64').value = document.getElementById('canvas').toDataURL("image/png");
+  console.log(document.getElementById('image_b64').value);
 };
 
 function retakePicture() {
