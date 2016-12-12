@@ -25,7 +25,8 @@ SECRET_KEY = 'j%-wg4^mwar2&_n#bu&b5o5emn#p-ac65f65th^z%zu&y-wy5x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aws-env.cjiqjg5vbi.us-west-2.elasticbeanstalk.com', 'localhost', '192.168.1.81']
+ALLOWED_HOSTS = ['aws-env.cjiqjg5vbi.us-west-2.elasticbeanstalk.com', 'localhost', '192.168.1.81',
+                 'www.lensapp.co.uk', 'lensapp.co.uk']
 
 
 # Application definition

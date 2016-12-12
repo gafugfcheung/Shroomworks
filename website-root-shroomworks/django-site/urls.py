@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^', include('herenow.urls', namespace="herenow")),
     url(r'^herenow/', include('herenow.urls', namespace="herenow")),
     url(r'^api/', include('api.urls', namespace="api")),
     url(r'^admin/', admin.site.urls),
