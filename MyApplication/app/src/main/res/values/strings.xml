@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Lens</string>
+
+    <string name="map">Map</string>
+    <string name="newsfeed">Newsfeed</string>
+    <string name="profile">Profile</string>
+    <string name="post">Create</string>
+
     <string name="edit_message">Email</string>
     <string name="news_feed">News feed view</string>
     <string name="button_send">Sign up</string>
@@ -9,7 +15,7 @@
     <string name="display_post">Display post</string>
     <string name="open_settings">Settings</string>
     <string name="log_out">Log out</string>
-    <string name="google_maps_key">AIzaSyBtVqa7wjKAzEIF6PatGv-AMjGYKTtjadg</string>
+    <string name="google_maps_key">AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
 
@@ -21,4 +27,13 @@
     <string name="sample_time">1 min ago</string>
     <string name="sample_description">Have shrooms everyday motherfuckers. </string>
     <string name="sample_text">blahblahblah</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
