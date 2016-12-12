@@ -6,32 +6,23 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <script src="{% static 'js/miscAjax.js' %}"></script>
+  <script>
+    function setContainerHeight() {
+      var container = document.getElementById("login-container");
+      var containerHeight = container.clientHeight;
+      var windowHeight = window.innerHeight;
+
+      var top = (windowHeight - containerHeight) / 2;
+
+      container.style.marginTop = top + "px";
+    }
+  </script>
+  <title>Lens</title>
 </head>
 
-  <body>
-    <div class="background">
-      <!-- sets entire page background -->
-      <div class="container">
-
-        <!-- defines header -->
-        <div class="header">
-          <h1>Lens app</h1>
-          <a href="/herenow/">Home</a>
-          <br>
-          {# <button id="myprofile" type="button">My profile</button>#}
-          <br>
-          {# <a href="/herenow/feed">What's new</a>#}
-        </div>
-
-        <!-- defines body -->
-        <div class="main-content">
+  <body onLoad="setContainerHeight()">
           {# <p>Loading content...</p>#}
           {% block content %} {% endblock %}
-        </div>
-      </div>
-    </div>
-
-    <a href="/herenow/logout">Logout</a>
 
     {% block javascript %}{% endblock %}
   </body>

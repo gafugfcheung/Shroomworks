@@ -5,8 +5,8 @@ from django.forms import ModelForm
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
 
 class SignupForm(forms.Form):

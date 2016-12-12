@@ -1,14 +1,26 @@
 {% extends "base_old.html" %}
-
+{% load static %}
 {% block content %}
-<h2>Enter your information to log in:</h2>
-{{ err_msg }}
 
-<form action="login" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Login">
-</form>
 
-<a href="/herenow/signup">New user?</a>
+<!--<a href="/herenow/signup">New user?</a>-->
+
+
+
+<div class="background">
+
+  <div id="login-container">
+    <img id="login-logo" src="{% static 'images/lenslogo.png' %}">
+    <h2 id="login-enter">Enter your information to login</h2>
+    {{ err_msg }}
+
+    <form action="login" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><input id="login-submit" type="submit" value="Login"></p>
+    </form>
+  </div>
+</div>
+
+
 {% endblock content %}
