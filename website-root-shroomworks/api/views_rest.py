@@ -19,7 +19,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class PostPreviewSet(viewsets.ModelViewSet):
     """ API endpoint that allows posts preview to be viewed """
-    queryset = Post.objects.all().order_by('-datetime')
+    queryset = Post.objects.filter(active=True).order_by('-datetime')
     serializer_class = PostPreviewSerializer
 
 

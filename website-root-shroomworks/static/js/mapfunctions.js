@@ -1,8 +1,11 @@
 var shrooms = {};
+var shroomCenters = {};
 var map;
-var shroomID;
+var dataResults = {};
+var srcToID = {};
 const DEFAULT_OPACITY = 0.8;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
+const MIN_ZOOM = 1;
 
 shroomOverlay.prototype = new google.maps.OverlayView();
 
@@ -19,15 +22,28 @@ function calculateBounds(point) {
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 11,
-    center: {lat: 51, lng: 0},
+    zoom: 8,
+    minZoom: 2,
+    center: {lat: 51.5, lng: 0},
+  });
+
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    for(var d in dataResults) {
+      addShroom(dataResults[d].id, dataResults[d].image, dataResults[d].location.lat, dataResults[d].location.lon);
+    }
   });
 
   map.addListener('zoom_changed', function() {
+    if (map.getZoom() < MIN_ZOOM) {
+      console.log("zoom too low");
+      map.setZoom(MIN_ZOOM);
+    }
     for (var i in shrooms) {
-      shrooms[i].bounds_ = calculateBounds(shrooms[i].bounds_.getCenter());
+      shrooms[i].bounds_ = calculateBounds(shroomCenters[i]);
     }
   });
+
+
 }
 
 /** @constructor */
@@ -45,8 +61,8 @@ function shroomOverlay(bounds, image, map) {
 
 shroomOverlay.prototype.onAdd = function() {
 
+
   var div = document.createElement('div');
-  div.id = shroomID;
   div.style.borderStyle = 'none';
   div.style.borderWidth = '0px';
   div.style.position = 'absolute';
@@ -71,8 +87,12 @@ shroomOverlay.prototype.onAdd = function() {
   panes.overlayMouseTarget.appendChild(div);
 
   var me = this;
+
   google.maps.event.addDomListener(img, 'click', function() {
-    shroomClicked(div.id);
+    //google.maps.event.trigger(me, 'click');
+    var id = srcToID[img.src];
+    var src = img.src;
+    displayFullScreen(id, src);
   });
 
   google.maps.event.addDomListener(img, 'mouseover', function() {

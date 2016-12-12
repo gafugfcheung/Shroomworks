@@ -14,11 +14,17 @@ class Profile(models.Model):
     status = models.CharField(max_length=100)
     image = models.ImageField(upload_to="profile", height_field=None, width_field=None, default='profile/default.jpeg')
 
+    def __str__(self):
+        return self.user.username
+
 
 class Location(models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lon = models.DecimalField(max_digits=8, decimal_places=5)
     description = models.CharField(max_length=100)
+
+    def __str__(self):
+        return "lat:" + str(self.lat) + " --- lon:" + str(self.lon)
 
 
 class Post(models.Model):
@@ -44,6 +50,9 @@ class Post(models.Model):
             return str(minutes) + ' minutes ago'
         else:
             return 'Just now'
+
+    def __str__(self):
+        return self.caption
 
 
 class Comment(models.Model):

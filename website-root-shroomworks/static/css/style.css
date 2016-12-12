@@ -151,15 +151,30 @@ a {
 
 #navbar-logo {
   float: left;
+  height: 100%;
+}
+
+#navbar-logo-pic {
+  float: left;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 0px;
+  width: 70px;
+}
+
+#navbar-logo-text {
+  float: left;
   font-size: 40px;
   padding: 15px;
-  height: 100%;
+  padding-left: 10px;
   line-height: 1 !important;
+  color: black !important;
 }
 
 #navbar-search {
   position: absolute;
-  width: 100%;
+  width: 50%;
+  left: 25%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -175,6 +190,31 @@ input {
 
 #navbar-download {
   float: right;
+  height: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#navbar-download-text {
+  float: left;
+  margin-right: 10px;
+}
+
+#navbar-download-1 {
+  height: 20px;
+  font-size: 20px;
+}
+
+#navbar-download-2 {
+  height: 20px;
+  font-size: 17px;
+}
+
+.navbar-app-icon {
+  line-height: 1;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #navbar-right {
@@ -207,7 +247,7 @@ input {
 }
 
 #navbar-edit {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #navbar-business {
@@ -243,11 +283,101 @@ input {
   background: rgba(0,0,0,0.6);
 }
 
+#fullscreen-photo-wrapper {
+    position: fixed;
+    margin-top: 2%;
+}
+
 #fullscreen-photo {
-  position: fixed;
-  max-width: 90%;
-  max-height: 90%;
-  margin-top: 15%;
-  margin-left: 5%;
-  margin-right: 5%;
+  float: left;
+}
+
+#fullscreen-meta {
+  float: right;
+  width: 360px;
+  padding: 15px;
+  background: #ccc;
+}
+
+#fullscreen-meta-title {
+  font-size: 20px;
+}
+
+#fullscreen-meta-map {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#fullscreen-meta-likes {
+  padding: 5px;
+  float: left;
+}
+
+#fullscreen-meta-comments {
+  padding: 5px;
+  float: right;
+}
+
+#create-comment-box {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: #ffffff;
+  background-color: #ddd;
+  margin-top: 35px;
+  padding-left: 5px;
+}
+
+#comments-list {
+  margin-top: 50px;
+}
+
+.picIcon {
+  height: 23px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.minimap_preview {
+  float: left;
+  padding-right: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 870px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

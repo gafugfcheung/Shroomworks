@@ -4,6 +4,9 @@ from django.http import JsonResponse, HttpResponse
 import json
 import datetime
 
+from django.views.decorators.csrf import csrf_exempt
+
+
 # image processing
 from django.core.files.base import ContentFile
 import re
@@ -97,3 +100,39 @@ def receive_picture(request):
     else:
         print 'user error'
         return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
+
+
+@csrf_exempt
+def create_post_kamil(request):
+    user = User.objects.get(id=5)
+    profile = Profile.objects.get(user=user)
+    response = json.loads(request.body.decode("utf-8"))
+    location = Location.objects.create(lat=response['lat'], lon=response['lon'])
+    post = Post.objects.create(location=location, profile=profile)
+    post.caption = response['caption']
+    ImageData = response['image']
+    dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+    ImageData = dataUrlPattern.match(ImageData).group(2)
+    if ImageData is None or len(ImageData) == 0:
+        return HttpResponse('Error receiving picture!')
+    image_savename = user.username + post.datetime.strftime('%Y-%m-%d %H:%M') + ".jpeg"
+    image = ContentFile(base64.b64decode(ImageData), image_savename)
+    post.image = image
+    post.save()
+    return JsonResponse({'status': 'success'})
+
+
+@csrf_exempt
+def test_endpoint(request):
+    user = User.objects.get(id=5)
+    profile = Profile.objects.get(user=user)
+    response = json.loads(request.body.decode("utf-8"))
+    data = 'successfully received: ' + response['data']
+    profile.status = response['data']
+    profile.save()
+    if data is not None:
+        print data
+        return JsonResponse({'status': data})
+    else:
+        print 'nothing received'
+        return JsonResponse({'status': 'nothing received!'})
