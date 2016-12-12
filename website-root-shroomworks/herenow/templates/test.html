@@ -34,6 +34,22 @@
       reader.readAsDataURL(file);
     }
   }
+
+  function sendTestAjax() {
+    var formData = JSON.stringify($("#data").serializeObject());
+    console.log(formData);
+
+    $.ajax({
+      url: '/api/test_endpoint',
+      type: "POST",
+      dataType: 'application/json; charset=utf-8',
+      data: formData,
+      success : function(response) {
+        console.log('Success');
+      }
+    });
+  }
+
   </script>
 {% endblock %}
 
@@ -50,6 +66,13 @@
   </form>
 
   <input type="button" value="Upload Image" onclick="sendImage()">
+
+  <form>
+    <br>Test send ajax:
+    <input type="text" id="data" name="data"></input>
+  </form>
+
+  <input type="button" value="Send an ajax test here!" onclick="sendTestAjax()"></input>
 
 </html>
 {% endblock content %}

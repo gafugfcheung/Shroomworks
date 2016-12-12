@@ -23,6 +23,9 @@ urlpatterns = [
     url(r'^create_post$', views_set.create_post, name='create_post'),
     url(r'^receive_picture$', views_set.receive_picture, name='receive_picture'),
 
+    url(r'^test_endpoint$', views_set.test_endpoint, name='test_endpoint'),
+    url(r'^create_post_kamil$', views_set.create_post_kamil, name='create_post_kamil'),
+
     # rest framework
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
