@@ -306,6 +306,9 @@ input {
 #fullscreen-meta-map {
   margin-top: 10px;
   margin-bottom: 10px;
+  height: 240px;
+  width: 330px;
+  object-fit: cover;
 }
 
 #fullscreen-meta-likes {

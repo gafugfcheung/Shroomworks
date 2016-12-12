@@ -98,7 +98,7 @@ function createPost() {
 
 // Get the webpic_modal
 var webpic_modal = document.getElementById('webpic_modal');
-var span = document.getElementsByClassName("close")[0];
+var spanX = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the webpic_modal
 function take_pic() {
@@ -107,7 +107,7 @@ function take_pic() {
 }
 
 // When the user clicks on <span> (x), close the webpic_modal
-span.onclick = function() {
+spanX.onclick = function() {
   stopCamera();
   webpic_modal.style.display = "none";
 }

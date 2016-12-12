@@ -1,4 +1,5 @@
 const METABOXWIDTH = 360;
+var currentCenter;
 
 function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
@@ -32,17 +33,25 @@ function IDtoFullScreen(id) {
 
 function displayFullScreen(id, src) {
 
-  document.getElementById("fullscreen").style.display = "block";
+  var lat = shroomCenters[id].lat();
+  var lng = shroomCenters[id].lng();
 
+  currentCenter = new google.maps.LatLng(lat, lng)
+
+  document.getElementById("fullscreen").style.display = "block";
   var img = document.getElementById("fullscreen-photo");
   img.src = src;
 
   var map_img = document.getElementById("fullscreen-meta-map");
 
-  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x240&zoom=5&markers=" + shroomCenters[id].lat() + "," + shroomCenters[id].lng() + "&key=AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw";
-
+  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x280&zoom=5&markers=" + lat + "," + lng + "&key=AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw";
   updateFullScreenSize();
 
+}
+
+function minimapClicked() {
+  map.setCenter(currentCenter);
+  hideFullScreen();
 }
 
 function updateFullScreenSize() {
