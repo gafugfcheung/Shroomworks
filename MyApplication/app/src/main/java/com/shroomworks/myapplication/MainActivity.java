@@ -69,6 +69,8 @@ public class MainActivity extends FragmentActivity implements LocationListener {
     }
 
     private void locationManager() {
+        latitude = 51.5;
+        longitude = 0.0;
         ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         if (checkLocationPermission()) {

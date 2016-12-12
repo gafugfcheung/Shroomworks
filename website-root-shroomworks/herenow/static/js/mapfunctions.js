@@ -11,7 +11,9 @@ shroomOverlay.prototype = new google.maps.OverlayView();
 
 function calculateBounds(point) {
   var zoomLevel = map.getZoom();
-  var radius = 100000 * ICON_SIZE;
+  var change = (point.lat() / 75) + 0.375;
+  var radius = 100000 * ICON_SIZE / change;
+  console.log("Lat: " + point.lat() + ", change: " + change + ", radius: " + radius);
   for (var i = zoomLevel; i > 0; i--) {
     radius /= 2;
   }
