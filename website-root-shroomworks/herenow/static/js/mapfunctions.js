@@ -5,7 +5,7 @@ var dataResults = {};
 var srcToID = {};
 const DEFAULT_OPACITY = 0.8;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
-const MIN_ZOOM = 1;
+const MIN_ZOOM = 5;
 
 shroomOverlay.prototype = new google.maps.OverlayView();
 
