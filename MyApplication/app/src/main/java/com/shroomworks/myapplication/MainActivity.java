@@ -20,6 +20,7 @@ import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -206,16 +207,17 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
     public void postPicture(View view) {
         encodePicture();
+        EditText titleLabel = (EditText) findViewById(R.id.titleEdit);
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final String URL = "http://aws-env.cjiqjg5vbi.us-west-2.elasticbeanstalk.com/api/create_post_kamil";
 
         Map<String,String> params = new HashMap<String, String>();
-
-        params.put("image",null);
+        System.out.println(encodedPic);
+        params.put("image",encodedPic);
         params.put("lat",String.valueOf(latitude));
         params.put("lon",String.valueOf(longitude));
-        params.put("caption","Test post");
+        params.put("caption",titleLabel.getText().toString());
 
         // pass second argument as "null" for GET requests
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
@@ -241,8 +243,9 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
     public void encodePicture() {
         Bitmap bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
+        bm = Bitmap.createScaledBitmap(bm,1920, 1440, true);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        bm.compress(Bitmap.CompressFormat.JPEG, 80, baos); //bm is the bitmap object
         byte[] b = baos.toByteArray();
         encodedPic = Base64.encodeToString(b, Base64.DEFAULT);
     }
