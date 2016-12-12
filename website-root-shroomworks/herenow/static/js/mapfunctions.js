@@ -3,6 +3,7 @@ var shroomCenters = {};
 var map;
 var dataResults = {};
 var srcToID = {};
+var geocoder;
 const DEFAULT_OPACITY = 1;
 const ICON_SIZE = 0.06; // 0.0 - 1.0
 const MIN_ZOOM = 5;
@@ -13,7 +14,6 @@ function calculateBounds(point) {
   var zoomLevel = map.getZoom();
   var change = (point.lat() / 75) + 0.375;
   var radius = 100000 * ICON_SIZE / change;
-  console.log("Lat: " + point.lat() + ", change: " + change + ", radius: " + radius);
   for (var i = zoomLevel; i > 0; i--) {
     radius /= 2;
   }
@@ -44,6 +44,8 @@ function initMap() {
       shrooms[i].bounds_ = calculateBounds(shroomCenters[i]);
     }
   });
+
+  geocoder = new google.maps.Geocoder;
 
 
 }
@@ -79,6 +81,7 @@ shroomOverlay.prototype.onAdd = function() {
   img.style.border = '3px solid #315FAC';
   img.style.opacity = DEFAULT_OPACITY;
   img.style.objectFit = "cover";
+  img.style.boxShadow = "2px 2px 5px #888888";
   div.appendChild(img);
 
   this.div_ = div;
@@ -128,6 +131,20 @@ shroomOverlay.prototype.onRemove = function() {
 };
 
 google.maps.event.addDomListener(window, 'load', initMap);
+
+function geocodeLatLng(latlng) {
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === 'OK') {
+      if (results[1]) {
+        console.log(results[1].formatted_address);
+      } else {
+        window.alert('Location unavailable');
+      }
+    } else {
+      window.alert('Location unavailable: ' + status);
+    }
+  });
+}
 
 // necessary math
 

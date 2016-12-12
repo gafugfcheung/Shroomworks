@@ -62,11 +62,12 @@ a {
 }
 
 .newsfeed-item-title {
-  position: absolute;
+  float: left;
+  /*position: absolute;
   width: 100%;
   text-align: center;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto;*/
 }
 
 .newsfeed-item-time {
@@ -295,20 +296,22 @@ input {
 #fullscreen-meta {
   float: right;
   width: 360px;
-  padding: 15px;
+  padding: 10px;
   background: #ccc;
 }
 
 #fullscreen-meta-title {
   font-size: 20px;
+  text-align: center;
 }
 
 #fullscreen-meta-map {
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 240px;
-  width: 330px;
+  width: 340px;
   object-fit: cover;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #888888;
 }
 
 #fullscreen-meta-likes {

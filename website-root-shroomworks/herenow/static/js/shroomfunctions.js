@@ -3,6 +3,7 @@ var currentCenter;
 
 function addShroom(id, src, lat, lng) {
   var centerPoint = new google.maps.LatLng(lat, lng);
+  //geocodeLatLng(centerPoint);
   shroomCenters[id] = centerPoint;
   var bounds = calculateBounds(centerPoint);
 
@@ -42,10 +43,26 @@ function displayFullScreen(id, src) {
   var img = document.getElementById("fullscreen-photo");
   img.src = src;
 
-  var map_img = document.getElementById("fullscreen-meta-map");
-
-  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=330x280&zoom=5&markers=" + lat + "," + lng + "&key=AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw";
   updateFullScreenSize();
+
+  var newCaption = "";
+  var likes = "";
+
+  for (var d in dataResults) {
+    if (dataResults[d].id == id) {
+      newCaption = dataResults[d].caption;
+      likes = dataResults[d].likes;
+      break;
+    }
+  }
+
+  document.getElementById("fullscreen-meta-title").innerHTML = newCaption;
+  document.getElementById("fullscreen-meta-like-count").innerHTML = likes + " like(s)";
+
+  var map_img = document.getElementById("fullscreen-meta-map");
+  var mapHeight = document.getElementById("fullscreen-meta").clientHeight - 71;
+  map_img.src = "http://maps.googleapis.com/maps/api/staticmap?size=340x" + mapHeight + "&zoom=5&markers=" + lat + "," + lng + "&key=AIzaSyDsSnbEKYUrxxht13XLL-tKBQnx93KfRqw";
+  map_img.style.height = mapHeight - 30;
 
 }
 
@@ -115,8 +132,9 @@ $(document).ready(function() {
     success : function(data) {
       for(var d in data.results) {
         dataResults[d] = data.results[d];
+        dataResults[d].likes = Math.floor(Math.random() * Math.random() * 30) + 1;
         srcToID[data.results[d].image] = data.results[d].id;
-        createFeedItem(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
+        createFeedItem(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, dataResults[d].likes);
       }
     }
   });

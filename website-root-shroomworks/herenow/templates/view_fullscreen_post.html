@@ -10,32 +10,33 @@
       <img id="fullscreen-photo" src="{% static 'images/lsdlarge.jpg' %}" onClick="null">
       <div id="fullscreen-meta">
 
-        <div id="fullscreen-meta-title">Title</div>
+          <div id="fullscreen-meta-title">Title</div>
 
-        <img id="fullscreen-meta-map" onClick="minimapClicked()">
+          <img id="fullscreen-meta-map" onClick="minimapClicked()">
 
-        <div id="fullscreen-meta-likes">
-          <img class="picIcon" src="{% static 'images/heart_icon.png' %}">
-          8 likes
-        </div>
+          <div id="fullscreen-meta-likes">
+            <img class="picIcon" style="float: left;" src="{% static 'images/heart_icon.png' %}">
+            <div id="fullscreen-meta-like-count" style="float: left;">
+              8 likes
+            </div>
+          </div>
 
-        <div id="fullscreen-meta-comments">
-          5 comments
-          <img class="picIcon" src="{% static 'images/comment_icon.png' %}">
-        </div>
+          <div id="fullscreen-meta-comments">
+            5 comments
+            <img class="picIcon" src="{% static 'images/comment_icon.png' %}">
+          </div>
 
-        <!--div id="create-comment-box">
-          <form>
-            Create comment:
-            <br>
-            <input type="text" size='42'></input>
-          </form>
-        </div>
+          <!--div id="create-comment-box">
+            <form>
+              Create comment:
+              <br>
+              <input type="text" size='42'></input>
+            </form>
+          </div>
 
-        <div id="comments-list">
-          Comment 1
-        </div-->
-
+          <div id="comments-list">
+            Comment 1
+          </div-->
       </div>
     </div>
   </div>

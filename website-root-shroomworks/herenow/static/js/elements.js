@@ -13,6 +13,6 @@ function createFeedItem(src, location, title, time, likes) {
   content += time;
   content += '</div></div><div class="newsfeed-item-bottombar"><div class="newsfeed-item-likes">';
   content += likes;
-  content += '</div></div></div>';
+  content += ' like(s)</div></div></div>';
   addToNewsFeed(content);
 }
