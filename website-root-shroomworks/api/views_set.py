@@ -111,8 +111,6 @@ def create_post_kamil(request):
     post = Post.objects.create(location=location, profile=profile)
     post.caption = response['caption']
     ImageData = response['image']
-    # dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
-    # ImageData = dataUrlPattern.match(ImageData).group(2)
     image_savename = user.username + post.datetime.strftime('%Y-%m-%d %H:%M') + ".jpeg"
     image = ContentFile(base64.b64decode(ImageData), image_savename)
     post.image = image
