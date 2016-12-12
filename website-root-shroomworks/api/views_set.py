@@ -74,6 +74,7 @@ def create_comment(request):
         return JsonResponse({'status': 'error', 'message': 'user_not_authenticated'})
 
 
+# test
 def receive_picture(request):
     user = request.user
     if user.is_authenticated:

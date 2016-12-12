@@ -14,8 +14,11 @@
     <script src="{% static 'js/shroomfunctions.js' %}"></script>
     <script src="{% static 'js/webPicture.js' %}"></script>
     <script src="{% static 'js/miscAjax.js' %}"></script>
+    <script src="{% static 'js/elements.js' %}"></script>
   </head>
   <body>
+    <!-- includes take picture pop up html -->
+    {% include "take_picture.html" %}
 
     <nav class="navbar navbar-inverse nomargin navbar-fixed-top navbar-custom">
       <div id="navbar-left">
@@ -50,60 +53,26 @@
             <div id="navbar-username">{ username }</div>
             <div id="navbar-edit"><a href="/herenow/profile">Manage Profile</a> | <a href="/herenow/logout">Sign Out</a> | <a onclick="take_pic()" href="#">Create Post</a></div>
           </div>
-
         </div>
-
         <div id="navbar-business">
           <div id="navbar-business-logo">LENS</div>
           <div id="navbar-edit">Business</div>
         </div>
       </div>
-
     </nav>
 
     <div class="container-fluid nomargin">
-
       <div id="mapstyle">
-
-
         <div id="map"></div>
       </div>
 
       <div id="newsfeed">
-
         <!-- news feed items go here -->
-
-      </div>
-
-    </div>
-
-    </div>
-
-    <div id="fullscreen">
-      <div id="fullscreen-bg" onClick="hideFullScreen()"></div>
-      <div id="fullscreen-photo-wrapper">
-        <img id="fullscreen-photo" src="{% static 'images/lsdlarge.jpg' %}" onClick="null">
-        <div id="fullscreen-meta">
-
-          <div id="fullscreen-meta-title">
-            Cockfosters
-          </div>
-
-          <img id="fullscreen-meta-map">
-
-          <div id="fullscreen-meta-likes">
-            <img class="picIcon" src="{% static 'images/heart_icon.png' %}">
-            8 likes
-          </div>
-
-          <div id="fullscreen-meta-comments">
-            5 comments
-            <img class="picIcon" src="{% static 'images/comment_icon.png' %}"
-          </div>
-
-        </div>
       </div>
     </div>
 
-    </body>
+    <!-- includes full screen html info -->
+    {% include "view_fullscreen_post.html" %}
+
+  </body>
 </html>

@@ -285,6 +285,7 @@ input {
 
 #fullscreen-photo-wrapper {
     position: fixed;
+    margin-top: 2%;
 }
 
 #fullscreen-photo {
@@ -315,6 +316,20 @@ input {
 #fullscreen-meta-comments {
   padding: 5px;
   float: right;
+}
+
+#create-comment-box {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: #ffffff;
+  background-color: #ddd;
+  margin-top: 35px;
+  padding-left: 5px;
+}
+
+#comments-list {
+  margin-top: 50px;
 }
 
 .picIcon {

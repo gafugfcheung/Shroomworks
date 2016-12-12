@@ -10,9 +10,9 @@ function addShroom(id, src, lat, lng) {
   shrooms[id] = newShroom;
 }
 
-function addTestShroom(lat, lng) {
-  addShroom(0, '/media/posts/test.jpeg', lat, lng);
-}
+// function addTestShroom(lat, lng) {
+//   addShroom(0, '/media/posts/test.jpeg', lat, lng);
+// }
 
 function removeShroom(id) {
   shrooms[id].setMap(null);
@@ -46,6 +46,9 @@ function displayFullScreen(id, src) {
 }
 
 function updateFullScreenSize() {
+
+  const PROPORTION = 0.8;
+
   var img = document.getElementById("fullscreen-photo");
   var wrapper = document.getElementById("fullscreen-photo-wrapper");
   var metabox = document.getElementById("fullscreen-meta");
@@ -55,15 +58,15 @@ function updateFullScreenSize() {
   var windowWidth = window.innerWidth;
   var windowHeight = window.innerHeight;
 
-  if (imgWidth > 0.9 * windowWidth - METABOXWIDTH) {
-    var newWidth = 0.9 * windowWidth - METABOXWIDTH;
+  if (imgWidth > PROPORTION * windowWidth - METABOXWIDTH) {
+    var newWidth = PROPORTION * windowWidth - METABOXWIDTH;
     imgHeight = imgHeight * newWidth / imgWidth;
     imgWidth = newWidth;
   }
 
-  if (imgHeight > 0.9 * windowHeight) {
-    imgWidth = imgWidth * 0.9 * windowHeight / imgHeight;
-    imgHeight = 0.9 * windowHeight;
+  if (imgHeight > PROPORTION * windowHeight) {
+    imgWidth = imgWidth * PROPORTION * windowHeight / imgHeight;
+    imgHeight = PROPORTION * windowHeight;
   }
 
   var wrapperWidth = imgWidth + METABOXWIDTH;
@@ -87,52 +90,25 @@ function addToNewsFeed(newContent) {
   document.getElementById("newsfeed").innerHTML += newContent;
 }
 
-function shroomHTML(src, location, title, time, likes) {
-
-  var content = "";
-  content += '<div class="newsfeed-item" onClick="IDtoFullScreen(';
-  content += srcToID[src];
-  content += ')"><img class="newsfeed-photo" src="';
-  content += src;
-  content += '"><div class="newsfeed-item-topbar"><div class="newsfeed-item-location newsfeed-item-minor">';
-  content += location;
-  content += '</div><div class="newsfeed-item-title">';
-  content += title;
-  content += '</div><div class="newsfeed-item-time newsfeed-item-minor">';
-  content += time;
-  content += '</div></div><div class="newsfeed-item-bottombar"><div class="newsfeed-item-likes">';
-  content += likes;
-  content += '</div></div></div>';
-
-  addToNewsFeed(content);
-
-}
-
 $(document).ready(function() {
-  console.log('Document ready');
-  console.log('Getting user information');
   $.ajax({
     url: '/api/get_profile_self',
     type: "GET",
-    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
     success : function(data) {
         document.getElementById('navbar-username').innerHTML = data.first_name;
         document.getElementById('navbar-profile-pic').src = data.image;
      }
   });
 
-  console.log('Getting posts list');
-    $.ajax({
-      url: '/api/posts',
-      type: "GET",
-      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
-      success : function(data) {
-        for(var d in data.results) {
-          dataResults[d] = data.results[d];
-          srcToID[data.results[d].image] = data.results[d].id;
-          shroomHTML(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
-        }
+  $.ajax({
+    url: '/api/posts_preview',
+    type: "GET",
+    success : function(data) {
+      for(var d in data.results) {
+        dataResults[d] = data.results[d];
+        srcToID[data.results[d].image] = data.results[d].id;
+        createFeedItem(data.results[d].image, data.results[d].location.description, data.results[d].caption, data.results[d].time_elapsed, 0);
       }
-    });
-
+    }
+  });
 })

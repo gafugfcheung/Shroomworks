@@ -67,7 +67,7 @@ function stopCamera() {
 
 // Trigger photo take
 function snap() {
-  document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 1280, 720);
+  document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('video'), 0, 0, 400, 300);
   document.getElementById('take_pic').style.display = 'none';
   document.getElementById('show_pic').style.display = 'block';
   document.getElementById('image_b64').value = document.getElementById('canvas').toDataURL("image/png");
@@ -95,25 +95,25 @@ function createPost() {
   });
 }
 
-// Get the modal
-var modal = document.getElementById('picture_modal');
+// Get the webpic_modal
+var webpic_modal = document.getElementById('webpic_modal');
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
+// When the user clicks the button, open the webpic_modal
 function take_pic() {
   startCamera();
-  modal.style.display = "block";
+  webpic_modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on <span> (x), close the webpic_modal
 span.onclick = function() {
   stopCamera();
-  modal.style.display = "none";
+  webpic_modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside of the webpic_modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-      modal.style.display = "none";
+  if (event.target == webpic_modal) {
+      webpic_modal.style.display = "none";
   }
 }
