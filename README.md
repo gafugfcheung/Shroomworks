@@ -1,10 +1,18 @@
-Our live test version has a lot of work in progress, so it may not be available all the time.
+<h2>Shroomworks</h2>
 
-Please try to access it at "www.lensapp.co.uk" or...
+The repository contains two directories: 
+    
+    MyApplication/
+Is the Android application project. It can be opened in Android Studio and compiled without errors, provided the necessary SDK tools are installed - follow the Android Studio prompts.
+
+    website-root-shroomworks/
+Is the website frontent and backend code.
+
+Our live test version has a lot of work in progress, so it may not be available all the time. Please try to access it at "www.lensapp.co.uk" or...
 
 Feel free to test our code!
 
-Just follow the steps below:
+Follow the steps below:
 *Note: we are using Python 2.7 and Django 1.10.4
 
 1) Start by downloading the folder /website-root-shroomworks from our repository
