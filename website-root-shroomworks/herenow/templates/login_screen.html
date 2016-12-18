@@ -16,8 +16,14 @@
 
     <form action="login" method="post">
       {% csrf_token %}
+
       {{ form.as_p }}
+<<<<<<< HEAD
+
+      <p><input id="login-submit" type="submit" value="Login"></p>
+=======
       <p><input class="button" id="login-submit" type="submit" value="Login"></p>
+>>>>>>> b63dd5a4a655c761a0689a2ad3c3e72173e5ab23
     </form>
 
     <!-- Begin MailChimp Signup Form -->

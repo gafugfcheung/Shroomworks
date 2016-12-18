@@ -15,6 +15,8 @@ import signal
 import sys
 from django.core.wsgi import get_wsgi_application
 
+sys.path.append("/opt/python/current/app/django-site")
+sys.path.append("/opt/python/run/venv/lib/python2.7/site-packages")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django-site.settings")
 
 try:
